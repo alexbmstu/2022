@@ -11,7 +11,7 @@
 Существует несколько видов графов, отличающихся свойствами предикатов инцидентности – *неориентированные, ориентированные, гипер- и ультраграфы, метаграфы*. 
 
 
-![Рисунок 1 — Виды графов](assets/graphs.png)  
+![Рисунок 1 — Виды графов](assets/graphs.png)
 **Рисунок 1 — Виды графов**
 
 Графы знаний является способом представления модели знаний в виде графовой структуры. Технологии представления и обработки знаний в виде графов приобрели большое значение во многих областях, в которых другие методы показали низкую эффективность. Благодаря способности сохранять информацию о различных объектах и явлениях и учитывать связи между ними, графы знаний могут использоваться при анализе больших данных в биоинформатике \[[1](https://www.researchgate.net/publication/51083566_Using_graph_theory_to_analyze_biological_networks)\], в персонифицированной медицине, системах безопасности городов \[[2](https://www.researchgate.net/publication/349236112_A_Metamodel_and_Framework_for_Artificial_General_Intelligence_From_Theory_to_Practice)\]\[[3](https://www.researchgate.net/publication/335444390_A_reasoning_based_model_for_anomaly_detection_in_the_Smart_City_domain)\]\[[4](https://www.researchgate.net/publication/321306827_A_Survey_on_Network_Embedding)\]\[[5](https://cs.stanford.edu/people/jure/pubs/graphrepresentation-ieee17.pdf)\]\[[6](https://www.researchgate.net/publication/332881469_ConceptNet_55_An_Open_Multilingual_Graph_of_General_Knowledge)\], в компьютерных сетях, финансовом секторе, при контроле сложного промышленного производства, для анализа информации социальных сетей и во многих других областях.  
