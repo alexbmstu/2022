@@ -351,10 +351,6 @@
 		 *
 		 */
 
-		//Объявление переменных
-		float interval;
-		time_t now = time(0);
-		strftime(buf, 100, "Start at local date: %d.%m.%Y.; local time: %H.%M.%S", localtime(&now));
 		// Запуск обработчика frequency_measurement() в sw_kernel
 		lnh_inst.gpc[0][LNH_CORES_LOW[0]]->start_async(__event__(frequency_measurement));
 		// Команда обмена синхронизирующими сообщениями
@@ -459,7 +455,7 @@
 	//-------------------------------------------------------------
 	 
 	void frequency_measurement() {
-	    
+		
 	        sync_with_host();
 	        lnh_sw_reset();
 	        lnh_rd_reg32_byref(TSC_LOW,&TSC_start);
@@ -467,7 +463,6 @@
 	        lnh_rd_reg32_byref(TSC_LOW,&TSC_stop);
 	        interval = TSC_stop-TSC_start;
 	        mq_send(interval);
-
 	}
 
 	//-------------------------------------------------------------
@@ -475,9 +470,8 @@
 	//-------------------------------------------------------------
 	 
 	void get_version() {
-	    
-	        mq_send(VERSION);
 
+	        mq_send(VERSION);
 	}
 
 	//-------------------------------------------------------------
@@ -485,10 +479,9 @@
 	//-------------------------------------------------------------
 	 
 	void get_lnh_status_low() {
-	    
+
 	        lnh_rd_reg32_byref(LNH_STATE_LOW,&lnh_core.result.status);
 	        mq_send(lnh_core.result.status);
-
 	}
 
 	//-------------------------------------------------------------
@@ -496,10 +489,9 @@
 	//-------------------------------------------------------------
 	 
 	void get_lnh_status_high() {
-	    
+
 	        lnh_rd_reg32_byref(LNH_STATE_HIGH,&lnh_core.result.status);
 	        mq_send(lnh_core.result.status);
-
 	}
 ``` 
 
