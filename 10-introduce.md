@@ -522,23 +522,21 @@
 
 # 3. Практическа часть <a name="3"></a>
 
-  
+## Лабораторная работа №1. Разработка и отладка программ в вычислительном комплексе Тераграф с помощью leonhard x64 xrt <a name="3_1"></a>
 
-## Ссылки на дополнительную литературу <a name="4_8"></a>
 
-  
 
-*   [https://github.com/Xilinx/Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials)
-    
-*   [https://www.xilinx.com/html_docs/xilinx2021_1/vitis_doc/index.html](https://www.xilinx.com/html_docs/xilinx2021_1/vitis_doc/index.html)
-    
-*   https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_1/ug1399-vitis-hls.pdf
-    
-*   [https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug1238-sdx-rnil.pdf](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug1238-sdx-rnil.pdf)
-    
-*   [https://xilinx.github.io/xup_compute_acceleration/Optimization_lab.html](https://xilinx.github.io/xup_compute_acceleration/Optimization_lab.html)
-    
-*   [https://www.khronos.org/registry/OpenCL/specs/opencl-cplusplus-1.2.pdf](https://www.khronos.org/registry/OpenCL/specs/opencl-cplusplus-1.2.pdf)
+
+
+## Лабораторная работа №2. Обработка и визуализация графов в вычислительном комплексе Тераграф <a name="3_2"></a>
+
+
+
+
+
+## Командный практикум. Обработка и визуализация графов в вычислительном комплексе Тераграф <a name="3_3"></a>
+
+ 
 
 
 
