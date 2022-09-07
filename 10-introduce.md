@@ -288,6 +288,240 @@
 *   Контроль результатов исполнения DISC команд.
 
 
+Ниже приведен пример кода программы Хост подсистемы, выполняющей инициализацию и измерение тактовой частоты GPC.
+
+```
+//Общесистемные библиотеки
+#include <iostream>
+#include <stdio.h>
+#include <stdexcept>
+#include <iomanip>
+#include <unistd.h>
+#include <sys/time.h>
+//Библиотеки Xilinx Runtime Library
+#include "experimental/xrt_device.h"
+#include "experimental/xrt_kernel.h"
+#include "experimental/xrt_bo.h"
+#include "experimental/xrt_ini.h"
+//Библиотека leonhard x64 xrt
+#include "gpc_defs.h"
+#include "leonhardx64_xrt.h"
+#include "gpc_handlers.h"
+
+int main(int argc, char** argv)
+{
+
+	// Приложение запскается с параметрами: <xclbin> <sw_kernel>
+	// <xclbin>    - путь к бинарному файлу прошивки ПЛИС Ultrascale+ с проектом Леонард Эйлер
+	// <sw_kernel> - путь к бинарному файлу sw_kernel в формате rawbinary
+
+	unsigned int err = 0;
+	unsigned int cores_count = 0;
+	float LNH_CLOCKS_PER_SEC;
+
+	//Использование макроса __foreach_core для определения количества доступных ядер
+	__foreach_core(group, core) cores_count++;
+
+	//Проверка передаваемых параметров
+	if (argc < 3) {
+		usage();
+		throw std::runtime_error("FAILED_TEST\nNo xclbin or sw_kernel specified");
+	}
+
+	//Инициализация карты #0 и конфигурирование карты ускорителя
+	leonhardx64 lnh_inst = leonhardx64(0,argv[1]);
+
+	//Иницилиация программных ядер во всех GPC
+	__foreach_core(group, core)
+	{
+		lnh_inst.load_sw_kernel(argv[2], group, core);
+	}
+
+	/*
+	 *
+	 * Чтение номера версии и статуса из микропроцесосра lnh64 каждого GPC
+	 *
+	 */
+
+	__foreach_core(group, core)
+	{
+		printf("Group #%d \tCore #%d\n", group, core);
+		// Запуск обработчика get_version() в sw_kernel
+		lnh_inst.gpc[group][core]->start_sync(__event__(get_version));
+		// Получение сообщения о номере версии (метод класса leonhardx64.mq_receive())
+		printf("\tSoftware Kernel Version:\t0x%08x\n", lnh_inst.gpc[group][core]->mq_receive());
+		// Запуск обработчика get_lnh_status_high() в sw_kernel
+		lnh_inst.gpc[group][core]->start_sync(__event__(get_lnh_status_high));
+		// Получение сообщения со значением старшей части регистра статуса 
+		printf("\tLeonhard Status Register:\t0x%08x", lnh_inst.gpc[group][core]->mq_receive());
+		// Получение сообщения со значением младшей части регистра статуса 
+		lnh_inst.gpc[group][core]->start_sync(__event__(get_lnh_status_low));
+		printf("_%08x\n", lnh_inst.gpc[group][core]->mq_receive());
+	}
+
+
+	/*
+	 *
+	 * Измерение тактовой частоты GPC[0]
+	 *
+	 */
+
+	//Объявление переменных
+	float interval;
+	time_t now = time(0);
+	strftime(buf, 100, "Start at local date: %d.%m.%Y.; local time: %H.%M.%S", localtime(&now));
+	// Запуск обработчика frequency_measurement() в sw_kernel
+	lnh_inst.gpc[0][LNH_CORES_LOW[0]]->start_async(__event__(frequency_measurement));
+	// Команда обмена синхронизирующими сообщениями
+	lnh_inst.gpc[0][LNH_CORES_LOW[0]]->sync_with_gpc(); // Start measurement
+	// Задержка 1 секунда
+	sleep(1);
+	// Команда обмена синхронизирующими сообщениями
+	lnh_inst.gpc[0][LNH_CORES_LOW[0]]->sync_with_gpc(); // Start measurement
+	// Ожидание завершения работы обработчика
+	lnh_inst.gpc[0][LNH_CORES_LOW[0]]->finish();
+	// Чтение сообщения из очереди сообщений
+	LNH_CLOCKS_PER_SEC = (float)lnh_inst.gpc[0][LNH_CORES_LOW[0]]->mq_receive();
+	printf("Leonhard clock frequency (LNH_CF): %u\n", LNH_CLOCKS_PER_SEC / 1000000, "MHz");
+
+	exit(0);
+}
+``` 
+
+Для представленного листинга должен быть также создан и скомпилирован ответный код для микропроцессора riscv32im, который будет работать в составе гетерогенного ядра обработки графов.
+В коде должна быть реализована логика установки состояния ядра: одно из двух состояний IDLE или BUSY. Также разработчиком должы быть реализованы обработчики вызываемых из Хост-подсистемы функций get_version(), get_lnh_status_high(), get_lnh_status_low(), frequency_measurement().
+
+Номер обработчика может быть задан явным обраом в Xост и sw_kernel частях, однако удобнее использовать механизм автоматической нумерации обработчиков на основе макросов С. Для этого мы будем использовать файл gpc_handkers.h, который должен быть включен как в проект Хоста, так и в проект sw_kernel:
+
+```
+#ifndef DEF_HANDLERS_H_
+#define DEF_HANDLERS_H_
+#define DECLARE_EVENT_HANDLER(handler) \
+            const unsigned int event_ ## handler =__LINE__; \
+            void handler ();
+#define __event__(handler) event_ ## handler
+//  Event handlers declarations by declaration line number!!! 
+DECLARE_EVENT_HANDLER(frequency_measurement);
+DECLARE_EVENT_HANDLER(get_lnh_status_low);
+DECLARE_EVENT_HANDLER(get_lnh_status_high);
+DECLARE_EVENT_HANDLER(get_version);
+#endif
+```  
+
+Таким образом, условное имя обработчика ставится в однозначное соответствие номеру строки, в которой он объявлен в файле gpc_handkers.h.
+
+В результате получим следующий код основного модуля sw_kernel
+
+```
+#include <stdlib.h>
+#include "lnh64.h"
+#include "gpc_io_swk.h"
+#include "gpc_handlers.h"
+
+#define VERSION 26
+#define DEFINE_LNH_DRIVER
+#define DEFINE_MQ_R2L
+#define DEFINE_MQ_L2R
+#define ROM_LOW_ADDR 0x00000000
+
+// Объявление структур для доступа к ресурсам микропроцессора lnh64
+extern lnh lnh_core;
+// Объявление структур для доступа к глобальной и внешней памяти, и очередям сообщений
+extern global_memory_io gmio;
+volatile unsigned int event_source;
+
+int main(void) {
+    /////////////////////////////////////////////////////////
+    //          Основной цикл запуска обработчиков
+    /////////////////////////////////////////////////////////
+    //Инициализация микропроцессорного ядра lnh64
+    lnh_init();
+    //Инициализация очередей host2gpc и gpc2host
+    gmio_init(lnh_core.partition.data_partition);
+    for (;;) {
+        //Ожидание события start
+        while (!gpc_start());
+        //Переход в режим BUSY и разрешение ввода/вывода
+        set_gpc_state(BUSY);
+        //Получение номера обработчика 
+        event_source = gpc_config();
+        //Вызов обработчика по номеру
+        switch(event_source) {
+            case __event__(frequency_measurement) : frequency_measurement(); break;
+            case __event__(get_lnh_status_low) : get_lnh_status_low(); break;
+            case __event__(get_lnh_status_high) : get_lnh_status_high(); break;
+            case __event__(get_version): get_version(); break;
+        }
+        //Переход в режим IDLE и запрет вводы/вывода
+        set_gpc_state(IDLE);
+        while (gpc_start());
+    }
+}
+    
+//-------------------------------------------------------------
+//      Глобальные переменные (для сокращения объема кода)
+//-------------------------------------------------------------
+    
+        u32 LNH_key;
+        u32 LNH_value;
+        u32 LNH_status;
+        u64 TSC_start;
+        u64 TSC_stop;
+        u32 interval;
+        int i,j;
+    
+
+//-------------------------------------------------------------
+//      Измерение тактовой частоты GPN
+//-------------------------------------------------------------
+ 
+void frequency_measurement() {
+    
+        sync_with_host();
+        lnh_sw_reset();
+        lnh_rd_reg32_byref(TSC_LOW,&TSC_start);
+        sync_with_host();
+        lnh_rd_reg32_byref(TSC_LOW,&TSC_stop);
+        interval = TSC_stop-TSC_start;
+        mq_send(interval);
+
+}
+
+
+//-------------------------------------------------------------
+//      Получить версию микрокода 
+//-------------------------------------------------------------
+ 
+void get_version() {
+    
+        mq_send(VERSION);
+
+}
+   
+
+//-------------------------------------------------------------
+//      Получить регистр статуса LOW Leonhard 
+//-------------------------------------------------------------
+ 
+void get_lnh_status_low() {
+    
+        lnh_rd_reg32_byref(LNH_STATE_LOW,&lnh_core.result.status);
+        mq_send(lnh_core.result.status);
+
+}
+
+//-------------------------------------------------------------
+//      Получить регистр статуса HIGH Leonhard 
+//-------------------------------------------------------------
+ 
+void get_lnh_status_high() {
+    
+        lnh_rd_reg32_byref(LNH_STATE_HIGH,&lnh_core.result.status);
+        mq_send(lnh_core.result.status);
+
+}
+``` 
+
 
 # 3. Практическа часть <a name="3"></a>
 

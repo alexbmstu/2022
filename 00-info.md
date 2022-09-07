@@ -49,6 +49,33 @@
 		- [2.2.5. Архитектура  подсистемы обработки графов](#2_2_5)
 	- [2.3. Микроархитектура гетерогенного ядра обработки графов](#2_3)
 	- [2.4. Принципы взаимодействия микропроцессора Леонард Эйлер и Хост подсистемы](#2_4)
-	- [2.5. Библиотека [`leonhard x64 xrt`](https://gitlab.com/leonhard-x64-xrt-v2)](#2_4)
+	- [2.5. Библиотека [leonhard x64 xrt](https://gitlab.com/leonhard-x64-xrt-v2)](#2_4)
+- [include <iostream>
+- [include <stdio.h>
+- [include <stdexcept>
+- [include <iomanip>
+- [include <unistd.h>
+- [include <sys/time.h>
+- [include "experimental/xrt_device.h"
+- [include "experimental/xrt_kernel.h"
+- [include "experimental/xrt_bo.h"
+- [include "experimental/xrt_ini.h"
+- [include "gpc_defs.h"
+- [include "leonhardx64_xrt.h"
+- [include "gpc_handlers.h"
+- [ifndef DEF_HANDLERS_H_
+- [define DEF_HANDLERS_H_
+- [define DECLARE_EVENT_HANDLER(handler) \
+- [define __event__(handler) event_ 	- [handler
+- [endif
+- [include <stdlib.h>
+- [include "lnh64.h"
+- [include "gpc_io_swk.h"
+- [include "gpc_handlers.h"
+- [define VERSION 26
+- [define DEFINE_LNH_DRIVER
+- [define DEFINE_MQ_R2L
+- [define DEFINE_MQ_L2R
+- [define ROM_LOW_ADDR 0x00000000
 - [3. Практическа часть](#3)
 	- [Ссылки на дополнительную литературу](#4_8)
