@@ -407,8 +407,7 @@
 	#define DEFINE_LNH_DRIVER
 	#define DEFINE_MQ_R2L
 	#define DEFINE_MQ_L2R
-	#define ROM_LOW_ADDR 0x00000000
-
+	
 	// Объявление структур для доступа к ресурсам микропроцессора lnh64
 	extern lnh lnh_core;
 	// Объявление структур для доступа к глобальной и внешней памяти, и очередям сообщений
