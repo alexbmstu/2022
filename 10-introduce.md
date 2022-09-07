@@ -367,7 +367,7 @@
 		lnh_inst.gpc[0][LNH_CORES_LOW[0]]->finish();
 		// Чтение сообщения из очереди сообщений
 		LNH_CLOCKS_PER_SEC = (float)lnh_inst.gpc[0][LNH_CORES_LOW[0]]->mq_receive();
-		printf("Leonhard clock frequency (LNH_CF): %u\n", LNH_CLOCKS_PER_SEC / 1000000, "MHz");
+		printf("Leonhard clock frequency (LNH_CF): %u MHz\n", LNH_CLOCKS_PER_SEC / 1000000);
 
 		exit(0);
 	}
