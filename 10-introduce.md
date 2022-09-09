@@ -5,9 +5,8 @@
 ## 1.1. Актуальность создания эффективных программных и аппаратных средств обработки графов <a name="1_1"></a>
 
 
-This is math: $$\int_0^\infty e^{-x} \; d x = 1$$ <p/>
+<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
 
-This is text: %%\LaTeX\ rocks, even in markdown with the latex plugin.%% <p/>
 
 > Граф – множество вершин *X*, на элементах которого определены двуместные **отношения смежности** (ребра) – *(x<sub>j</sub>, x<sub>i</sub>) <em>&isin;</em>F* , где *x<sub>j</sub>*,*x<sub>i</sub> <em>&isin;</em> X*. Тогда пара вершин, находящихся в отношении смежности, рассматривается как ребро *u<sub>k</sub> = (x<sub>j</sub>, x<sub>i</sub>), u<sub>k</sub> <em>&isin;</em> U*.
 
