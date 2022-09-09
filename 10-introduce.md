@@ -492,7 +492,7 @@
 	}
 ``` 
 
-### Обмен данными между GPC и хост-подсистемой через Глобальную память <a name="2_5_1"></a>
+### Обмен данными между GPC и хост-подсистемой через глобальную память <a name="2_5_1"></a>
 
 
 Взаимодействие обработчика sw_kernel и хост-подсистемы может выполняться через Глобальную память размером 128 КБ, распределенную между ядрами одной группы (до 6 ядер, в зависимости от модификации) следующим образом:
@@ -519,13 +519,13 @@
  //Выделение буфера в RAM хост-посистемы для передачи
  unsigned int *host2gpc_buffer[LNH_GROUPS_COUNT][LNH_MAX_CORES_IN_GROUP];
  __foreach_core(group, core)
-   		host2gpc_buffer[group][core] = (unsigned int*) malloc(1024*sizeof(int));
+        host2gpc_buffer[group][core] = (unsigned int*) malloc(1024*sizeof(int));
  //Запись данных в буферы Host2GPC
  __foreach_core(group, core) 
-		lnh_inst.gpc[group][core]->buf_write(1024*sizeof(int),host2gpc_buffer[group][core]);
+	    lnh_inst.gpc[group][core]->buf_write(1024*sizeof(int),host2gpc_buffer[group][core]);
  //Передача сигнала о готовности буфера и его размера
  __foreach_core(group, core) {
-		lnh_inst.gpc[group][core]->mq_send(1024*sizeof(int));
+	    lnh_inst.gpc[group][core]->mq_send(1024*sizeof(int));
 ```
 
 Пример ответного кода sw_kernel
@@ -535,7 +535,7 @@
     unsigned int *buffer = (unsigned int*)malloc(size);
     buf_read(size, buffer);
 ```
-Аналогичным образом может быть организована обратная передача через буфер GPC2Host с помощью метода leonhardx64->buf_read.
+Аналогичным образом может быть организована обратная передача через буфер GPC2Host с помощью метода leonhardx64->buf_read (в хост-подсистеме) и buf_write (в sw_kernel).
 
 Если необходимо передавать большие блоки данных, то можно указанную процедуру можно повторять несколько раз. Органичивающим фактором для повышения размеров буферов является не только незначительный размер Глобальной памяти, но и малый размер RAM CPE riscv32im (64 КБ).
 
@@ -549,18 +549,18 @@
  //Выделение буфера в RAM хост-посистемы для передачи
  char* host2gpc_ext_buffer[LNH_GROUPS_COUNT][LNH_MAX_CORES_IN_GROUP];
  __foreach_core(group, core)
-   		host2gpc_ext_buffer[group][core] = lnh_inst.gpc[group][core]->external_memory_create_buffer(1024*1024*sizeof(int));
- //Запись данных в буферы External memory
+   	    host2gpc_ext_buffer[group][core] = lnh_inst.gpc[group][core]->external_memory_create_buffer(1024*1024*sizeof(int));
+ //Отображение буфера в пространство ввода-вывода и запись данных External memory
  __foreach_core(group, core) 
-		lnh_inst.gpc[group][core]->external_memory_sync_to_device(0,8192*sizeof(int));
+	    lnh_inst.gpc[group][core]->external_memory_sync_to_device(0,8192*sizeof(int));
  //Передача физического адреса начала буфера
  __foreach_core(group, core) {
-		long long tmp = lnh_inst.gpc[group][core]->external_memory_address();
-		lnh_inst.gpc[group][core]->mq_send((unsigned int)tmp);
+	    long long tmp = lnh_inst.gpc[group][core]->external_memory_address();
+	    lnh_inst.gpc[group][core]->mq_send((unsigned int)tmp);
 	}
 //Передача сигнала о готовности буфера и его размера
   __foreach_core(group, core) {
-		lnh_inst.gpc[group][core]->mq_send(1024*sizeof(int));
+	    lnh_inst.gpc[group][core]->mq_send(1024*sizeof(int));
 	}
 ```
 
