@@ -1067,19 +1067,19 @@ make clean
 ### Представление структур данных в виде ключей и значений <a name="3_1_4"></a>
 
 ```
-//Структура данных
-#define 		A 	1 	//Структура A
+ //Структура данных
+ #define 		A 	1 	//Структура A
 
-//Структура A - ключ
+ //Структура A - ключ
 	/* 
 	 * key[63..32] -  Поле 0 - Идентификатор 
 	 * key[31..0]  -  Поле 2 - Порядковый номер
 	 */
-STRUCT( 
-A_key, {
+ STRUCT( 
+ A_key, {
         uint32_t	id   :32;	//Поле 0: id
         uint32_t	index:32; 	//Поле 1: index
-} );
+ } );
 
 //Структура A - значение
 	/* 
@@ -1088,32 +1088,33 @@ A_key, {
 	 * value[23..8]  -  Поле 2 - Атрибут 2 
 	 * value[7..0]   -  Поле 3 - Атрибут 3
 	 */
-STRUCT( 
-A_value, {
+ STRUCT( 
+ A_value, {
         uint32_t     atr0   :32; //Поле 0: Атрибут 0
         uint8_t      atr1   :8;	 //Поле 1: Атрибут 1
         uint16_t     atr2   :16; //Поле 2: Атрибут 2
         uint8_t      atr3   :8;	 //Поле 3: Атрибут 3
-} );
+ } );
 
 ```
 
 
 
 ```
-//Макросы для формирования структур inline 
-#define STRUCT(type, ...) typedef union { struct __VA_ARGS__ __struct; uint64_t bits; } type
-#define INLINE(type,...) (((type){__VA_ARGS__}).bits)
+ //Макросы для формирования структур inline 
+ #define STRUCT(type, ...) typedef union { struct __VA_ARGS__ __struct; uint64_t bits; } type
+ #define INLINE(type,...) (((type){__VA_ARGS__}).bits)
 ```
 
 ```
-//Выполнить поиск ключа, ближайшего большего ключу 0x1234
-lnh_ngr(A,INLINE(A_key,{.id=0x1234,.index=-1}));
-//Прочитать Атрибут 0 найденного значения
-atribute0 = (*(A_value*)&lnh_core.result.value).__struct.atr0;
-//Вставить новое значение
-lnh_ins_async(A,INLINE(A_key,{.id=atr0,.index=0}),INLINE(A_value,{.atr0=0x1234,.atr1=0,.atr2=0,.atr3=0,}));  
+ //Выполнить поиск ключа, ближайшего большего ключу 0x1234
+ lnh_ngr(A,INLINE(A_key,{.id=0x1234,.index=-1}));
+ //Прочитать Атрибут 0 найденного значения
+ atribute0 = (*(A_value*)&lnh_core.result.value).__struct.atr0;
+ //Вставить новое значение
+ lnh_ins_async(A,INLINE(A_key,{.id=atr0,.index=0}),INLINE(A_value,{.atr0=0x1234,.atr1=0,.atr2=0,.atr3=0,}));  
 ```
+
 
 ### Отладка работы host и sw_kernel в консоли <a name="3_1_5"></a>
 
