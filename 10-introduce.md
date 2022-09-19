@@ -945,7 +945,7 @@ bool lnh_ins_sync(uint64_t str, uint64_t key, uint64_t value)
 
 ```
 //-------------------------------------------------------------
-//      Получить пакет из глобальной памяти и аписат в lnh64
+//      Получить пакет из глобальной памяти и отправить в lnh64
 //-------------------------------------------------------------
  
 void insert_burst() {
@@ -1144,53 +1144,82 @@ make clean
 ![](assets/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC_html_9110ca7511e2e853.png)  
   
 
-Запустите Vitis IDE.
+Запустите Vitis IDE. Создайте новое рабочее пространство (workspace). Далее выберите пункт Import Project.
+
 
 ![](assets/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC_html_a666017bef375619.png)  
   
 
-Создайте новый проект в пункте: Create Application Project.
 
-В открывшемся окне нажмите: Next.
+Выберите пункт Import Project from Git 
 
-  
+![](assets/"Screenshot1.png)
 
-![](assets/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC_html_e029e0658baf58ac.png)  
-  
 
-  
+Далее выберите пункт Clone URI
 
-В следующем окне выберите платформу xilinx\_u200\_xdma\_201830\_2.
+![](assets/"Screenshot2.png)
 
-![](assets/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC_html_e52047cd7ba50392.png)  
-![](assets/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC_html_1a8c96975e060117.png)  
+Далее в поле URI укажите путь к репозиторию: `https://gitlab.com/leonhard-x64-xrt-v2/disc-example.git`
 
-Далее укажите название проекта
 
-[comment]: <> (В следующем окне нажмите на кнопки: Vitis IDE Examples и Vitis IDE Libraries. В результате будут загружены примеры и демо-проекты, которые будут использованы в следующих лабораторных работах.)
+![](assets/"Screenshot3.png)
 
-Далее выберите пункт: Empty Application и Finish.
+ Далее выберите ветку main:
 
-  
+![](assets/"Screenshot4.png)
+ 
 
-  
+В следующем окне выберите пункт "Clone submodules". В пункте Directory укажите путь к созданному рабочему пространству.
 
-![](assets/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC_html_22bfabac1876b3dc.png)  
-  
+![](assets/"Screenshot5.png)
 
-  
+Далее выберите пункт Import existing Eclipse projects
 
-В итоге будет создан шаблон проекта, состоящий из следующих частей:
+![](assets/"Screenshot6.png)
 
-*   <Название проекта>\_kernels — исходные описания ядер проекта и результаты сборки объектных аппаратных модулей \*.xo (в программном проекте испольщоваться не будет).
-    
-*   <Название проекта>\_system\_hw\_link — результаты линковки ядер в единый конфигурационный файл \*.xclbin (в программном проекте испольщоваться не будет).
-    
-*   <Название проекта> - исходные описания программного обеспечения хоста.
-    
+В следующем окне нажмите кнопку Finish. В результате будет создан корневой проект Leonhardx64_xrt_system и проект приложения Leonhardx64_xrt. 
 
-Далее, необходимо разместить код в 
+Далее для корневого проекта Leonhardx64_xrt_system укажите значение опции Active Build configuration: Hardware.
 
+![](assets/"Screenshot7.png)
+
+В результате будет сформирован отладочный проект с настоенными путями к системным библиотекам:
+
+![](assets/"Screenshot8.png)
+
+
+Для успешной сборки проекта требуется добавить путь к заголовочным файлам. Для этого в свойствах проекта Leonhardx64_xrt (Пункт Properties) откройте опцию С/C++ Build -> Settings -> GCC Host Compiler (x86_64) -> Includes -> Include paths (-I).
+
+Добавьте два дополнительных пути: 
+
+`${workspace_loc}/disc-example/`
+
+`${workspace_loc}/disc-example/host-lib/src/`
+
+![](assets/"Screenshot9.png)
+
+
+Далее можно выполнить сборку проекта.
+
+
+Для запуска отладки необходимо настроить отладчик. Для этого в пункте Debug (пиктограмма Bug) выберите пункт Debug Configuration.
+
+Далее выберите вариант отладки System Project Debug.   
+
+![](assets/"Screenshot10.png)
+
+![](assets/"Screenshot11.png)
+
+
+Далее укажите в параметрах запуска Program Arguments путь к файлу конфигурации `leonhard_2cores_267mhz.xclbin` и программному ядру `sw_kernel_main.rawbinary`, полученный ранее. 
+
+![](assets/"Screenshot12.png)
+
+
+В итоге будет запущена отладка проекта хост-подсистемы. 
+
+![](assets/"Screenshot13.png)
 
 
 ### 3.1.7. Индивидуальные задания <a name="3_1_7"></a>
