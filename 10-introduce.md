@@ -1153,40 +1153,40 @@ make clean
 
 Выберите пункт Import Project from Git 
 
-![](assets/"Screenshot1.png)
+![](assets/Screenshot1.png)
 
 
 Далее выберите пункт Clone URI
 
-![](assets/"Screenshot2.png)
+![](assets/Screenshot2.png)
 
 Далее в поле URI укажите путь к репозиторию: `https://gitlab.com/leonhard-x64-xrt-v2/disc-example.git`
 
 
-![](assets/"Screenshot3.png)
+![](assets/Screenshot3.png)
 
  Далее выберите ветку main:
 
-![](assets/"Screenshot4.png)
+![](assets/Screenshot4.png)
  
 
 В следующем окне выберите пункт "Clone submodules". В пункте Directory укажите путь к созданному рабочему пространству.
 
-![](assets/"Screenshot5.png)
+![](assets/Screenshot5.png)
 
 Далее выберите пункт Import existing Eclipse projects
 
-![](assets/"Screenshot6.png)
+![](assets/Screenshot6.png)
 
 В следующем окне нажмите кнопку Finish. В результате будет создан корневой проект Leonhardx64_xrt_system и проект приложения Leonhardx64_xrt. 
 
 Далее для корневого проекта Leonhardx64_xrt_system укажите значение опции Active Build configuration: Hardware.
 
-![](assets/"Screenshot7.png)
+![](assets/Screenshot7.png)
 
 В результате будет сформирован отладочный проект с настоенными путями к системным библиотекам:
 
-![](assets/"Screenshot8.png)
+![](assets/Screenshot8.png)
 
 
 Для успешной сборки проекта требуется добавить путь к заголовочным файлам. Для этого в свойствах проекта Leonhardx64_xrt (Пункт Properties) откройте опцию С/C++ Build -> Settings -> GCC Host Compiler (x86_64) -> Includes -> Include paths (-I).
@@ -1197,7 +1197,7 @@ make clean
 
 `${workspace_loc}/disc-example/host-lib/src/`
 
-![](assets/"Screenshot9.png)
+![](assets/Screenshot9.png)
 
 
 Далее можно выполнить сборку проекта.
@@ -1207,19 +1207,19 @@ make clean
 
 Далее выберите вариант отладки System Project Debug.   
 
-![](assets/"Screenshot10.png)
+![](assets/Screenshot10.png)
 
-![](assets/"Screenshot11.png)
+![](assets/Screenshot11.png)
 
 
 Далее укажите в параметрах запуска Program Arguments путь к файлу конфигурации `leonhard_2cores_267mhz.xclbin` и программному ядру `sw_kernel_main.rawbinary`, полученный ранее. 
 
-![](assets/"Screenshot12.png)
+![](assets/Screenshot12.png)
 
 
 В итоге будет запущена отладка проекта хост-подсистемы. 
 
-![](assets/"Screenshot13.png)
+![](assets/Screenshot13.png)
 
 
 ### 3.1.7. Индивидуальные задания <a name="3_1_7"></a>
