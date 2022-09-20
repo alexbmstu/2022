@@ -778,6 +778,140 @@ bool lnh_ins_sync(uint64_t str, uint64_t key, uint64_t value)
 
 ```
 
+
+Полный перечень функций вызовов команд DISC вы можете посмотреть в файле [lnh64.h](https://gitlab.com/leonhard-x64-xrt-v2/libraries/sw-kernel-lib/-/blob/main/lib/lnh64.h).
+
+
+```cpp
+
+//==================================
+// Функции для работы с Leonhard API
+//==================================
+
+void                            lnh_hw_reset();
+void                            lnh_sw_reset();
+void                            lnh_init();
+uint64_t                        lnh_rd_reg64(int adr);
+uint32_t                        lnh_rd_reg32(int adr);
+void                            lnh_fast_recall(uint32_t key);
+void                            lnh_fast_recall(uint32_t key, uint32_t value);
+void                            lnh_fast_recall(uint64_t key);
+void                            lnh_fast_recall(uint64_t key, uint64_t value);
+
+//================================
+// Сервисные функции  Leonhard API
+//================================
+
+uint32_t                        float2uint(float value);
+float                           uint2float(uint32_t value);
+uint64_t                        double2ull(double value);
+double                          ull2double(uint64_t value);
+void                            lnh_sync();
+void                            lnh_syncm(int mbr);
+
+//================================
+// Синхронные функции Leonhard API
+//================================
+
+bool                            lnh_ins_sync(uint64_t str, uint64_t key, uint64_t value);
+bool                            lnh_del_sync(uint64_t str, uint64_t key);
+uint32_t                        lnh_get_num(uint64_t str);
+bool                            lnh_del_str_sync(uint64_t str);
+bool                            lnh_sq_sync(uint64_t str);
+bool                            lnh_or_sync(uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_and_sync(uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_not_sync(uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_lseq_sync(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_ls_sync(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_greq_sync(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_gr_sync(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_grls_sync(uint64_t key_ls, uint64_t key_gr, uint64_t A, uint64_t R);
+bool                            lnh_search(uint64_t str, uint64_t key);
+bool                            lnh_next(uint64_t str, uint64_t key);
+bool                            lnh_prev(uint64_t str, uint64_t key);
+bool                            lnh_nsm(uint64_t str, uint64_t key);
+bool                            lnh_ngr(uint64_t str, uint64_t key);
+bool                            lnh_nsm_signed(uint64_t str, long long int key);
+bool                            lnh_ngr_signed(uint64_t str, long long int key);
+bool                            lnh_get_first(uint64_t str);
+bool                            lnh_get_last(uint64_t str);
+bool                            lnh_get_first_signed(uint64_t str);
+bool                            lnh_get_last_signed(uint64_t str);
+
+
+//================================================================
+// Синхронные функции Leonhard API с записью в очередь результатов
+//================================================================
+
+bool                            lnh_ins_syncq(uint64_t str, uint64_t key, uint64_t value);
+bool                            lnh_del_syncq(uint64_t str, uint64_t key);
+uint32_t                        lnh_get_numq(uint64_t str);
+bool                            lnh_del_str_syncq(uint64_t str);
+bool                            lnh_sq_syncq(uint64_t str);
+bool                            lnh_or_syncq(uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_and_syncq(uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_not_syncq(uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_lseq_syncq(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_ls_syncq(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_greq_syncq(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_gr_syncq(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_grls_syncq(uint64_t key_ls, uint64_t key_gr, uint64_t A, uint64_t R);
+bool                            lnh_searchq(uint64_t str, uint64_t key);
+bool                            lnh_nextq(uint64_t str, uint64_t key);
+bool                            lnh_prevq(uint64_t str, uint64_t key);
+bool                            lnh_nsmq(uint64_t str, uint64_t key);
+bool                            lnh_ngrq(uint64_t str, uint64_t key);
+bool                            lnh_get_firstq(uint64_t str);
+bool                            lnh_get_lastq(uint64_t str);
+bool                            lnh_get_q();
+
+
+//=================================================================
+// Асинхронные функции Leonhard API с записью в асинхронный Mailbox
+//=================================================================
+
+bool                            lnh_ins_syncm(int st_mreg, uint64_t str, uint64_t key, uint64_t value);
+bool                            lnh_del_syncm(int st_mreg, uint64_t str, uint64_t key);
+uint32_t                        lnh_get_numm(uint64_t str);
+bool                            lnh_del_str_syncm(int st_mreg, uint64_t str);
+bool                            lnh_sq_syncm(int st_mreg, uint64_t str);
+bool                            lnh_or_syncm(int st_mreg, uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_and_syncm(int st_mreg, uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_not_syncm(int st_mreg, uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_lseq_syncm(int st_mreg, uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_ls_syncm(int st_mreg, uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_greq_syncm(int st_mreg, uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_gr_syncm(int st_mreg, uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_grls_syncm(int st_mreg, uint64_t key_ls, uint64_t key_gr, uint64_t A, uint64_t R);
+bool                            lnh_searchm(int key_mreg, int val_mreg, int st_mreg, uint64_t str, uint64_t key);
+bool                            lnh_nextm(int key_mreg, int val_mreg, int st_mreg, uint64_t str, uint64_t key);
+bool                            lnh_prevm(int key_mreg, int val_mreg, int st_mreg, uint64_t str, uint64_t key);
+bool                            lnh_nsmm(int key_mreg, int val_mreg, int st_mreg, uint64_t str, uint64_t key);
+bool                            lnh_ngrm(int key_mreg, int val_mreg, int st_mreg, uint64_t str, uint64_t key);
+bool                            lnh_get_firstm(int key_mreg, int val_mreg, int st_mreg, uint64_t str);
+bool                            lnh_get_lastm(int key_mreg, int val_mreg, int st_mreg, uint64_t str);
+uint64_t                        lnh_get_m(int mreg);
+
+
+//========================================================
+// Асинхронные функции Leonhard API без записи результатов
+//========================================================
+bool                            lnh_ins_async(uint64_t str, uint64_t key, uint64_t value);
+bool                            lnh_del_async(uint64_t str, uint64_t key);
+bool                            lnh_del_str_async(uint64_t str);
+bool                            lnh_sq_async(uint64_t str);
+bool                            lnh_or_async(uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_and_async(uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_not_async(uint64_t A, uint64_t B, uint64_t R);
+bool                            lnh_lseq_async(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_ls_async(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_greq_async(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_gr_async(uint64_t key, uint64_t A, uint64_t R);
+bool                            lnh_grls_async(uint64_t key_ls, uint64_t key_gr, uint64_t A, uint64_t R);
+
+```
+
+
 ### 2.6.3. Представление структур данных в виде ключей и значений <a name="2_6_3"></a>
 
 SPE lnh64 использует беззнаковое сравнение 64 битных ключей для формирования упорядоченной структуры B+дерева. Это позволяет выполнять большинство операций набора команд DISC за O(log<sub>8</sub>sub>n) операций доступа к памяти. 
