@@ -1692,6 +1692,58 @@ p[s]=0
 ![Пример поиска кратчайших путей в графе - состояние структур в конце работы алгоритма](assets/Dijkstra04.jpg)
 
 
+```c
+void dijkstra() {
+ unsigned int start_virtex = mq_receive(); //get start virtex from MQ
+ unsigned int stop_virtex = mq_receive(); //get stop virtex
+ lnh_del_str_async(Q); //Clear Q from previous run
+ //Insert start virtex to Q with zero shortest path
+ lnh_ins_async(Q,INLINE(q_record,{.u=start_virtex,.index=0}),0); 
+ //Get btwc to store it again
+ lnh_search(G,INLINE(u_key,{.index=PTH_IDX,.u=start_virtex}));     
+ btwc = (*(u_index*)&lnh_core.result.value).__struct.btwc;
+ //Save du for start virtex 
+ lnh_ins_async(G,INLINE(u_key,{.index=PTH_IDX,.u=start_virtex}),
+ INLINE(u_index,{.du=0,.btwc=btwc})); 
+ while (lnh_get_first(Q)) { //Iterate all vertices in order of Q
+     u = (*(q_record*)&lnh_core.result.key).__struct.u; 
+     du = (*(q_record*)&lnh_core.result.key).__struct.index;
+     lnh_del_async(Q,lnh_core.result.key); //Delete it from Q
+     lnh_search(G,INLINE(u_key,{.index=BASE_IDX, .u=u}));
+     pu = (*(u_attributes*)&lnh_core.result.value).__struct.pu;
+     eQ = (*(u_attributes*)&lnh_core.result.value).__struct.eQ;
+     adj_c = (*(u_attributes*)&lnh_core.result.value).__struct.adj_c; 
+     // Clear eQ flag
+     lnh_ins_async(G,lnh_core.result.key,
+      INLINE(u_attributes,{.pu=pu, .eQ=false, .non=0, .adj_c=adj_c})); 
+     for (i=0;i<adj_c;i++) {  //Fore ach Adj
+          lnh_search(G,INLINE(u_key,{.index=i,.u=u})); //Get Adj[i]
+          wu = (*(edge*)&lnh_core.result.value).__struct.w;
+          adj = (*(edge*)&lnh_core.result.value).__struct.v;
+          //Get information about adjacency 
+          lnh_search(G,INLINE(u_key,{.index=BASE_IDX,.u=adj})); 
+          eQc=(*(u_attributes*)&lnh_core.result.value).__struct.eQ;
+          count=(*(u_attributes*)&lnh_core.result.value).__struct.adj_c;
+          lnh_search(G,INLINE(u_key,{.index=PTH_IDX,.u=adj}));
+          dv=(*(u_index*)&lnh_core.result.value).__struct.du;
+          btwc=(*(u_index*)&lnh_core.result.value).__struct.btwc;
+          if (dv>(du+wu)) { //If shortest path changed 
+           if (eQc) {
+            if (dv!=INF) //if not a loopback, push it to Q
+                lnh_del_async(Q,INLINE(q_record,{.u=adj, .index=dv}));
+            lnh_ins_async(Q,INLINE(q_record,{.u=adj, .index=du+wu}),0); }
+           //Update the shortest path
+           lnh_ins_async(G,INLINE(u_key,{.index=PTH_IDX,.u=adj}),
+           INLINE(u_index,{.du=du+wu,.btwc=btwc}));  //change du
+           lnh_ins_async(G,INLINE(u_key,{.index=BASE_IDX,.u=adj}),
+           INLINE(u_attributes,{.pu=u, .eQ=eQc, .non=0, .adj_c=count})); }}} 
+ //send shortest path to the Host
+ lnh_search(G,INLINE(u_key,{.index=PTH_IDX, .u=stop_virtex}));
+ mq_send((*(u_index*)&lnh_core.result.value).__struct.du);
+}
+
+```
+
 #### 3.2.2.3. Алгоритм поиска центральности <a name="3_2_2_3"></a>
 
 
