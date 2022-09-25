@@ -11,7 +11,7 @@
 		- [2.2.4. Подсистема обработки графов ](https://alexbmstu.github.io/2022/main_frame.html#2_2_4)
 	- [2.3. Микроархитектура гетерогенного ядра обработки графов ](https://alexbmstu.github.io/2022/main_frame.html#2_3)
 	- [2.4. Принципы взаимодействия микропроцессора Леонард Эйлер и хост-подсистемы](https://alexbmstu.github.io/2022/main_frame.html#2_4)
-	- [2.5. Библиотека [leonhard x64 xrt](https://gitlab.com/leonhard-x64-xrt-v2) ](https://alexbmstu.github.io/2022/main_frame.html#2_5)
+	- [2.5. Библиотека leonhard x64 xrt ](https://alexbmstu.github.io/2022/main_frame.html#2_5)
 		- [2.5.1. Обмен данными между GPC и хост-подсистемой через глобальную память ](https://alexbmstu.github.io/2022/main_frame.html#2_5_1)
 		- [2.5.2. Обмен данными между GPC и хост-подсистемой через внешнюю память ](https://alexbmstu.github.io/2022/main_frame.html#2_5_2)
 	- [2.6. Взаимодействие CPE(riscv32im) и SPE(lnh64)](https://alexbmstu.github.io/2022/main_frame.html#2_6)
