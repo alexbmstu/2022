@@ -1,4 +1,4 @@
-- [**Cтуденческий практикум МГТУ им. Н.Э.Баумана по обработке графов в вычислительном комплексе Тераграф** ](https://alexbmstu.github.io/2022/main_frame.html#0)
+- [**Cтуденческий практикум МГТУ им. Н.Э.Баумана по обработке и визуализации графов** ](https://alexbmstu.github.io/2022/main_frame.html#0)
 	- [*Аннотация* ](https://alexbmstu.github.io/2022/main_frame.html#0.1)
 - [1. Графы знаний ](https://alexbmstu.github.io/2022/main_frame.html#1)
 	- [1.1. Актуальность создания эффективных программных и аппаратных средств обработки графов ](https://alexbmstu.github.io/2022/main_frame.html#1_1)
