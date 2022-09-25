@@ -10,17 +10,13 @@ cat 10*.md > 1.txt
 #cat 80*.md >> 1.txt
 #cat 9*.md >> 1.txt
 #cat appendix.md >> 1.txt
-cat 1.txt | grep \^\#  > toc.txt
-sed -i 's/# /#/g' toc.txt
-sed -i 's/####/\t\t\t- [/g' toc.txt
-sed -i 's/###/\t\t- [/g' toc.txt
-sed -i 's/##/\t- [/g' toc.txt
-sed -i 's/#/- [/g' toc.txt
-sed -i 's/ <a name="/](#/g' toc.txt
-sed -i 's/<a name="/](#/g' toc.txt
-sed -i 's/"><\/a>/)/g' toc.txt
-
-cp title.txt 00-info.md
-cat toc.txt >> 00-info.md
+cat 1.txt | grep \^\#  > toc.md
+sed -i 's/# /#/g' toc.md
+sed -i 's/####/\t\t\t- [/g' toc.md
+sed -i 's/###/\t\t- [/g' toc.md
+sed -i 's/##/\t- [/g' toc.md
+sed -i 's/#/- [/g' toc.md
+sed -i 's/ <a name="/](#/g' toc.md
+sed -i 's/<a name="/](#/g' toc.md
+sed -i 's/"><\/a>/)/g' toc.md
 rm 1.txt
-rm toc.txt
