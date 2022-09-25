@@ -1,6 +1,7 @@
 #!/bin/bash
 HREF='https:\/\/alexbmstu.github.io\/2022\/main_frame.html'
-cat 10*.md > 1.txt
+cat 00*.md > 1.txt
+cat 10*.md >> 1.txt
 #cat 20*.md >> 1.txt
 #cat 30*.md >> 1.txt
 #cat 40*.md >> 1.txt
