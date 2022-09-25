@@ -11,7 +11,7 @@ cat 10*.md > 1.txt
 #cat 9*.md >> 1.txt
 #cat appendix.md >> 1.txt
 cat 1.txt | grep \^\#  > toc.md
-sed -i "s/<a name=\"/](<a name=$HREF@/g" toc.md
+sed -i "s/<a name=\"/]($HREF@/g" toc.md
 sed -i 's/# /#/g' toc.md
 sed -i 's/####/\t\t\t- [/g' toc.md
 sed -i 's/###/\t\t- [/g' toc.md
