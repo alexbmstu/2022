@@ -35,6 +35,13 @@
 			- [3.2.1.4. Обработка графов с помощью набора команд дискретной математики ](https://alexbmstu.github.io/2022/main_frame.html#3_2_1_4)
 		- [3.2.2. Примеры реализации алгоритмов на графах ](https://alexbmstu.github.io/2022/main_frame.html#3_2_2)
 			- [3.2.2.1. Алгоритм Дейкстры поиска кратчайшего пути ](https://alexbmstu.github.io/2022/main_frame.html#3_2_2_1)
+- [define 		G 	1 	//Граф
+- [define 		Q 	2 	//Очередь вершин
+- [define INF 0xFFFFFFFF                           //значение бесконечности для задания неинициализированного значения пути
+- [define ADJ_C_BITS 32						     //количество бит для хранения индекса смежной вершины графа
+- [define PTH_IDX  	IDX_MAX                      //номер индексной записи о вершине
+- [define BASE_IDX 	IDX_MAX-1                    //номер записи с атрибутами
+- [define VATR_IDX 	IDX_MAX-2                    //атрибуты для визуализации
 			- [3.2.2.3. Алгоритм поиска центральности ](https://alexbmstu.github.io/2022/main_frame.html#3_2_2_3)
 		- [3.2.3. Алгоритмы визуализации графов ](https://alexbmstu.github.io/2022/main_frame.html#3_2_3)
 			- [3.2.3.1. Выделение сообществ ](https://alexbmstu.github.io/2022/main_frame.html#3_2_3_1)
