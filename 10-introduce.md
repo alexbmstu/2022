@@ -1693,91 +1693,89 @@ p[s] = 0
 
 
 ```c
+	//Структуры для представления ключей и значений
+
+	//Структуры данных
+	#define 		G 	1 	//Граф
+	#define 		Q 	2 	//Очередь вершин
+
+	//константы алгоритма
+	#define INF 0xFFFFFFFF                           //значение бесконечности для задания неинициализированного значения пути
+	#define ADJ_C_BITS 32						     //количество бит для хранения индекса смежной вершины графа
+	const unsigned int 	IDX_MAX=(1ull<<ADJ_C_BITS)-1;//максимальная смежность
+	#define PTH_IDX  	IDX_MAX                      //номер индексной записи о вершине
+	#define BASE_IDX 	IDX_MAX-1                    //номер записи с атрибутами
+	#define VATR_IDX 	IDX_MAX-2                    //атрибуты для визуализации
+
+	///////////////////////////////////
+	// Граф 
+	///////////////////////////////////
+
+	//регистр ключа для вершины
+		/* Struktura 1 - G - описание графа
+		 * key[63..32] - номер вершины
+		 * key[31..0] -  индекс записи о вершине (0,1..adj_u)
+		 */
+	STRUCT( //Data structure for graph operations
+	u_key, {
+	        unsigned int                				index:32;	//Поле 1: индекс
+	        unsigned int                				u:32; 		//Поле 0: номер вершины
+	} );
+
+	//регистр значения индексной записи для вершины (с индексом PTH_IDX)
+		 /* key[16..0] = PTH_IDX
+		 * data[31..0] - d[u] - кратчайший путь
+		 */ 
+	STRUCT( //Data structure for graph operations
+	u_index, {
+	        unsigned int                				du:32;    	//Поле 1: кратчайший путь
+	        unsigned int                				btwc:32;   	//Поле 0: центральность
+	} );
+
+	//регистр значения атрибутов для вершины с индексом BASE_IDX
+		 /* для поля key[31..0] =  BASE_IDX
+		 * data[31..0] - p[u] - pred nomer vershini v kratchajshem puti
+		 * data[40..32] - 1 - u is in Q; 0 is not in Q
+		 * data[63..48] - |Adj[u]| - kol-vo svjazej s vershinoj u
+		 */
+	STRUCT( //Data structure for graph operations
+	u_attributes, {
+			unsigned int					pu:32;  //Поле 3: номер предшествующей вершины в кратчайшем пути
+			bool						eQ:8;       //Поле 2: флаг присутствия вершины в очереди Q
+			bool						non:8;      //Поле 1: не используется
+			short int  					adj_c:16;   //Поле 0: количество ребер вершины
+	} ); 
+
+	//регистр значения для записей о смежных вершинах
+		/*
+		 * key[INDEX] = 0..IDX_MAX-3
+		 * data[15..0] - w[u,v] вес ребра
+		 * data[47..16] - Adj[u]
+		 * atr[63..48] - virtex atributes
+		 */
+	STRUCT( //Data structure for graph operations
+	edge, {
+			unsigned int				v:32;		//Поле 2: индекс смежной вершины				
+			short int 					w:16; 		//Поле 1: вес ребра uv
+			short int 					attr:16;	//Поле 0: атрибуты ребра
+	} ); 
+
+	///////////////////////////////////
+	// Очередь для алгоритма Дейкстры
+	///////////////////////////////////
 
 
-//Структуры для представления ключей и значений
-
-//Структуры данных
-#define 		G 	1 	//Граф
-#define 		Q 	2 	//Очередь вершин
-
-//константы алгоритма
-#define INF 0xFFFFFFFF                           //значение бесконечности для задания неинициализированного значения пути
-#define ADJ_C_BITS 32						     //количество бит для хранения индекса смежной вершины графа
-const unsigned int 	IDX_MAX=(1ull<<ADJ_C_BITS)-1;//максимальная смежность
-#define PTH_IDX  	IDX_MAX                      //номер индексной записи о вершине
-#define BASE_IDX 	IDX_MAX-1                    //номер записи с атрибутами
-#define VATR_IDX 	IDX_MAX-2                    //атрибуты для визуализации
-
-///////////////////////////////////
-// Граф 
-///////////////////////////////////
-
-//регистр ключа для вершины
-	/* Struktura 1 - G - описание графа
-	 * key[63..32] - номер вершины
-	 * key[31..0] -  индекс записи о вершине (0,1..adj_u)
-	 */
-STRUCT( //Data structure for graph operations
-u_key, {
-        unsigned int                				index:32;	//Поле 1: индекс
-        unsigned int                				u:32; 		//Поле 0: номер вершины
-} );
-
-//регистр значения индексной записи для вершины (с индексом PTH_IDX)
-	 /* key[16..0] = PTH_IDX
-	 * data[31..0] - d[u] - кратчайший путь
-	 */ 
-STRUCT( //Data structure for graph operations
-u_index, {
-        unsigned int                				du:32;    	//Поле 1: кратчайший путь
-        unsigned int                				btwc:32;   	//Поле 0: центральность
-} );
-
-//регистр значения атрибутов для вершины с индексом BASE_IDX
-	 /* для поля key[31..0] =  BASE_IDX
-	 * data[31..0] - p[u] - pred nomer vershini v kratchajshem puti
-	 * data[40..32] - 1 - u is in Q; 0 is not in Q
-	 * data[63..48] - |Adj[u]| - kol-vo svjazej s vershinoj u
-	 */
-STRUCT( //Data structure for graph operations
-u_attributes, {
-		unsigned int					pu:32;  //Поле 3: номер предшествующей вершины в кратчайшем пути
-		bool						eQ:8;       //Поле 2: флаг присутствия вершины в очереди Q
-		bool						non:8;      //Поле 1: не используется
-		short int  					adj_c:16;   //Поле 0: количество ребер вершины
-} ); 
-
-//регистр значения для записей о смежных вершинах
-	/*
-	 * key[INDEX] = 0..IDX_MAX-3
-	 * data[15..0] - w[u,v] вес ребра
-	 * data[47..16] - Adj[u]
-	 * atr[63..48] - virtex atributes
-	 */
-STRUCT( //Data structure for graph operations
-edge, {
-		unsigned int				v:32;		//Поле 2: индекс смежной вершины				
-		short int 					w:16; 		//Поле 1: вес ребра uv
-		short int 					attr:16;	//Поле 0: атрибуты ребра
-} ); 
-
-///////////////////////////////////
-// Очередь для алгоритма Дейкстры
-///////////////////////////////////
-
-
-//регистр ключа для записей очереди
-	/*
-	 * Struktura 2 - Q - ochered'
-	 * key[31..0] - nomer vershini
-	 * key[63..32] - d[u] kratchajshij put'
-	*/
-STRUCT( //Data structure for queue operations
-q_record, {
-		unsigned int					u:32;      //Поле 1: индекс вершины				
-		unsigned int					index:32;  //Поле 0: кратчайший путь				
-} ); 
+	//регистр ключа для записей очереди
+		/*
+		 * Struktura 2 - Q - ochered'
+		 * key[31..0] - nomer vershini
+		 * key[63..32] - d[u] kratchajshij put'
+		*/
+	STRUCT( //Data structure for queue operations
+	q_record, {
+			unsigned int					u:32;      //Поле 1: индекс вершины				
+			unsigned int					index:32;  //Поле 0: кратчайший путь				
+	} ); 
 
 ```
 
