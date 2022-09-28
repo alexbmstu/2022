@@ -31,5 +31,6 @@
 
 - **Командная разработка алгоритмов обработки и визуализации графов**
 
-[Вступительная презентация](https://github.com/alexbmstu/2021/blob/master/docs/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC.pdf)
+<a href="https://github.com/alexbmstu/2021/blob/master/docs/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC.pdf" target="_blank">Вступительная презентация</a>
+
 
