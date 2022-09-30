@@ -37,7 +37,7 @@
 			- [3.2.2.1. Алгоритм Дейкстры поиска кратчайшего пути ](https://alexbmstu.github.io/2022/main_frame.html#3_2_2_1)
 			- [3.2.2.3. Алгоритм поиска центральности ](https://alexbmstu.github.io/2022/main_frame.html#3_2_2_3)
 		- [3.2.3. Алгоритмы визуализации графов ](https://alexbmstu.github.io/2022/main_frame.html#3_2_3)
-			- [3.2.3.1. Выделение сообществ ](https://alexbmstu.github.io/2022/main_frame.html#3_2_3_1)
+			- [3.2.3.1. Алгоритмы выделение сообществ ](https://alexbmstu.github.io/2022/main_frame.html#3_2_3_1)
 			- [3.2.3.2. Edge Betweenness – метод Girvan – Newman ](https://alexbmstu.github.io/2022/main_frame.html#3_2_3_2)
 			- [3.2.3.3. MultiLevel – метод Louvain ](https://alexbmstu.github.io/2022/main_frame.html#3_2_3_3)
 		- [3.2.4. Алгоритмы раскладки графов ](https://alexbmstu.github.io/2022/main_frame.html#3_2_4)
