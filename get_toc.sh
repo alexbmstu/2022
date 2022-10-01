@@ -17,7 +17,7 @@ sed -i 's/# /#/g' toc.md
 sed -i 's/####/\t\t\t- [/g' toc.md
 sed -i 's/###/\t\t- [/g' toc.md
 sed -i 's/##/\t- [/g' toc.md
-sed -i 's/#/- [/g' toc.md
+sed -i 's/#/\n---\n\n- [/g' toc.md
 sed -i 's/ <a name="/](#/g' toc.md
 sed -i 's/<a name="/](#/g' toc.md
 sed -i 's/"><\/a>/)/g' toc.md

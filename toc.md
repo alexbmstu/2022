@@ -1,9 +1,18 @@
+
+---
+
 - [**Cтуденческий практикум МГТУ им. Н.Э.Баумана по обработке и визуализации графов** ](https://alexbmstu.github.io/2022/main_frame.html#0)
 	- [*Аннотация* ](https://alexbmstu.github.io/2022/main_frame.html#0.1)
+
+---
+
 - [1. Графы знаний ](https://alexbmstu.github.io/2022/main_frame.html#1)
 	- [1.1. Актуальность создания эффективных программных и аппаратных средств обработки графов ](https://alexbmstu.github.io/2022/main_frame.html#1_1)
 	- [1.2. Применения графов в задачах аналитики данных и искусственном интеллекте ](https://alexbmstu.github.io/2022/main_frame.html#1_2)
 	- [1.3. Переход от реляционной к графовой форме представления информации ](https://alexbmstu.github.io/2022/main_frame.html#1_3)
+
+---
+
 - [2. Структура микропроцессора Леонард Эйлер и вычислительного комплекса Тераграф ](https://alexbmstu.github.io/2022/main_frame.html#2)
 	- [2.1. Набор команд дискретной математики ](https://alexbmstu.github.io/2022/main_frame.html#2_1)
 	- [2.2. Структура вычислительного комплекса Тераграф ](https://alexbmstu.github.io/2022/main_frame.html#2_2)
@@ -20,6 +29,9 @@
 		- [2.6.1. Программная модель микропроцессора lnh64 ](https://alexbmstu.github.io/2022/main_frame.html#2_6_1)
 		- [2.6.2. Вызовы и передача операндов команд дискретной математики ](https://alexbmstu.github.io/2022/main_frame.html#2_6_2)
 		- [2.6.3. Представление структур данных в виде ключей и значений ](https://alexbmstu.github.io/2022/main_frame.html#2_6_3)
+
+---
+
 - [3. Практическа часть ](https://alexbmstu.github.io/2022/main_frame.html#3)
 	- [3.1. Практакум №1. Разработка и отладка программ в вычислительном комплексе Тераграф с помощью leonhard x64 xrt ](https://alexbmstu.github.io/2022/main_frame.html#3_1)
 		- [3.1.1. Пример взаимодествия устройств ](https://alexbmstu.github.io/2022/main_frame.html#3_1_1)
