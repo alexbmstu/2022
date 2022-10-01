@@ -33,13 +33,13 @@
 ---
 
 - [3. Практическа часть ](https://alexbmstu.github.io/2022/main_frame.html#3)
-	- [3.1. Практакум №1. Разработка и отладка программ в вычислительном комплексе Тераграф с помощью leonhard x64 xrt ](https://alexbmstu.github.io/2022/main_frame.html#3_1)
+	- [3.1. **Практакум №1. Разработка и отладка программ в вычислительном комплексе Тераграф с помощью leonhard x64 xrt** ](https://alexbmstu.github.io/2022/main_frame.html#3_1)
 		- [3.1.1. Пример взаимодествия устройств ](https://alexbmstu.github.io/2022/main_frame.html#3_1_1)
 		- [3.1.2. Подключение к удаленному серверу ](https://alexbmstu.github.io/2022/main_frame.html#3_1_2)
 		- [3.1.3. Сборка и запуск проекта ](https://alexbmstu.github.io/2022/main_frame.html#3_1_3)
 		- [3.1.4. Отладка работы host и sw_kernel ](https://alexbmstu.github.io/2022/main_frame.html#3_1_4)
 		- [3.1.5. Индивидуальные задания ](https://alexbmstu.github.io/2022/main_frame.html#3_1_5)
-	- [3.2. Практикум №2. Обработка и визуализация графов в вычислительном комплексе Тераграф ](https://alexbmstu.github.io/2022/main_frame.html#3_2)
+	- [3.2. **Практикум №2. Обработка и визуализация графов в вычислительном комплексе Тераграф** ](https://alexbmstu.github.io/2022/main_frame.html#3_2)
 		- [3.2.1. Представление информационных моделей алгоритма в виде структур данных ](https://alexbmstu.github.io/2022/main_frame.html#3_2_1)
 			- [3.2.1.1. Представление графа *G*(*V*,*E*) списком смежных вершин ](https://alexbmstu.github.io/2022/main_frame.html#3_2_1_1)
 			- [3.2.1.2. Представление графа *G*(*V*,*E*) списком инцидентных ребер ](https://alexbmstu.github.io/2022/main_frame.html#3_2_1_2)
