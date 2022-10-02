@@ -2324,7 +2324,112 @@ Cannot start Bokeh server, port 33000 is already in use
 
 **Вариант 1**
 
-> **Визуализация графа**. Сформировать в хост-подсистеме и передать в SPE таблицу коммутации из 32 ip адресов 195.19.32.1/24 (адреса 195.19.32.1 .. 195.19.32.32), где для каждого адреса доступны 8 вариантов интерфейсов (всего 256 записей в таблице). Вариант определяется по уровню QoS, принимающему значения от 0 до 7. Выполнить тестирование работы коммутатора, посылая из хост-подсистемы уровень QoS и ip адрес, и сравнивая полученный от GPC номер интерфейса с ожидаемым.  
+> **Визуализация графа**. Выполнить визуализацию неориентированного графа, представленного в формате tsv. Каждая строчка файла представляет собой описание ребра, сотоящее из трех чисел (Вершина,Вершина,Вес) или двух чисел (Вершина,Вершина). Во втором случае вес ребра принимается равным 1.  
+
+
+**Вариант 1** 
+> **Визуализация графа**: [Файл данных kronecker_var01](/data/kronecker_var01.tsv)
+
+**Вариант 2** 
+> **Визуализация графа**: [Файл данных kronecker_var02](/data/kronecker_var02.tsv)
+
+**Вариант 3** 
+> **Визуализация графа**: [Файл данных kronecker_var03](/data/kronecker_var03.tsv)
+
+**Вариант 4** 
+> **Визуализация графа**: [Файл данных kronecker_var04](/data/kronecker_var04.tsv)
+
+**Вариант 5** 
+> **Визуализация графа**: [Файл данных kronecker_var05](/data/kronecker_var05.tsv)
+
+**Вариант 6** 
+> **Визуализация графа**: [Файл данных kronecker_var06](/data/kronecker_var06.tsv)
+
+**Вариант 7** 
+> **Визуализация графа**: [Файл данных kronecker_var07](/data/kronecker_var07.tsv)
+
+**Вариант 8** 
+> **Визуализация графа**: [Файл данных kronecker_var08](/data/kronecker_var08.tsv)
+
+**Вариант 9** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes](/data/simulated_blockmodel_graph_500_nodes.tsv)
+
+**Вариант 10** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_1](/data/simulated_blockmodel_graph_500_nodes_snowball_1.tsv)
+
+**Вариант 11** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_2](/data/simulated_blockmodel_graph_500_nodes_snowball_2.tsv)
+
+**Вариант 12** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_3](/data/simulated_blockmodel_graph_500_nodes_snowball_3.tsv)
+
+**Вариант 13** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_4](/data/simulated_blockmodel_graph_500_nodes_snowball_4.tsv)
+
+**Вариант 14** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_5](/data/simulated_blockmodel_graph_500_nodes_snowball_5.tsv)
+
+**Вариант 15** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_6](/data/simulated_blockmodel_graph_500_nodes_snowball_6.tsv)
+
+**Вариант 16** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_7](/data/simulated_blockmodel_graph_500_nodes_snowball_7.tsv)
+
+**Вариант 17** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_8](/data/simulated_blockmodel_graph_500_nodes_snowball_8.tsv)
+
+**Вариант 18** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_9](/data/simulated_blockmodel_graph_500_nodes_snowball_9.tsv)
+
+**Вариант 19** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_10](/data/simulated_blockmodel_graph_500_nodes_snowball_10.tsv)
+
+**Вариант 20** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes](/data/simulated_blockmodel_graph_1000_nodes.tsv)
+
+**Вариант 21** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_1](/data/simulated_blockmodel_graph_1000_nodes_snowball_1.tsv)
+
+**Вариант 22** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_2](/data/simulated_blockmodel_graph_1000_nodes_snowball_2.tsv)
+
+**Вариант 23** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_3](/data/simulated_blockmodel_graph_1000_nodes_snowball_3.tsv)
+
+**Вариант 24** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_4](/data/simulated_blockmodel_graph_1000_nodes_snowball_4.tsv)
+
+**Вариант 25** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_5](/data/simulated_blockmodel_graph_1000_nodes_snowball_5.tsv)
+
+**Вариант 26** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_6](/data/simulated_blockmodel_graph_1000_nodes_snowball_6.tsv)
+
+**Вариант 27** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_7](/data/simulated_blockmodel_graph_1000_nodes_snowball_7.tsv)
+
+**Вариант 28** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_8](/data/simulated_blockmodel_graph_1000_nodes_snowball_8.tsv)
+
+**Вариант 29** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_9](/data/simulated_blockmodel_graph_1000_nodes_snowball_9.tsv)
+
+**Вариант 30** 
+> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_10](/data/simulated_blockmodel_graph_1000_nodes_snowball_10.tsv)
+
+**Вариант 31** 
+> **Визуализация графа**: [Файл данных static_highOverlap_highBlockSizeVar_1000_nodes](/data/static_highOverlap_highBlockSizeVar_1000_nodes.tsv)
+
+**Вариант 32** 
+> **Визуализация графа**: [Файл данных static_highOverlap_lowBlockSizeVar_1000_nodes](/data/static_highOverlap_lowBlockSizeVar_1000_nodes.tsv)
+
+**Вариант 33** 
+> **Визуализация графа**: [Файл данных static_lowOverlap_highBlockSizeVar_1000_nodes](/data/static_lowOverlap_highBlockSizeVar_1000_nodes.tsv)
+
+**Вариант 34** 
+> **Визуализация графа**: [Файл данных static_lowOverlap_lowBlockSizeVar_1000_nodes](/data/static_lowOverlap_lowBlockSizeVar_1000_nodes.tsv)
+
+
 
 
 
