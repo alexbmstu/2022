@@ -1535,7 +1535,7 @@ _Визуализация графа_ — это графическое пред
 
 * Далее выполняется размещени вершин сообщества внутри каждой выделенной области. На данном этапе применяются алгоритмы, позволяющие представить связи небольшой группы вершин. Частым случаем является применение алгоритмов, основанных на имитации сил притяжения и отталкивания. сформированных на основе информации о вершинах и ребрах. 
 
-* На заключительном этапе происходит передача готового графа визуализации в библиотеку. осуществляющую отрисовку сцены визуализации. В практикуме используется бибилотека [bokeh](https://bokeh.org/).  
+* На заключительном этапе происходит передача готового графа визуализации в библиотеку. осуществляющую отрисовку сцены визуализации. В практикуме используется бибилотека <a href="https://bokeh.org/" target="_blank">bokeh</a>.  
 
 
 ## 4.2. Представление информационных моделей алгоритма в виде структур данных <a name="4_2"></a>
@@ -2326,106 +2326,106 @@ Cannot start Bokeh server, port 33000 is already in use
 
 
 **Вариант 1** 
-> **Визуализация графа**: [Файл данных kronecker_var01](/data/kronecker_var01.tsv)
+> **Визуализация графа**: <a href="/data/kronecker_var01.tsv" target="_blank">Файл данных kronecker_var01</a>
 
 **Вариант 2** 
-> **Визуализация графа**: [Файл данных kronecker_var02](/data/kronecker_var02.tsv)
+> **Визуализация графа**: <a href="/data/kronecker_var02.tsv" target="_blank">Файл данных kronecker_var02</a>
 
 **Вариант 3** 
-> **Визуализация графа**: [Файл данных kronecker_var03](/data/kronecker_var03.tsv)
+> **Визуализация графа**: <a href="/data/kronecker_var03.tsv" target="_blank">Файл данных kronecker_var03</a>
 
 **Вариант 4** 
-> **Визуализация графа**: [Файл данных kronecker_var04](/data/kronecker_var04.tsv)
+> **Визуализация графа**: <a href="/data/kronecker_var04.tsv" target="_blank">Файл данных kronecker_var04</a>
 
 **Вариант 5** 
-> **Визуализация графа**: [Файл данных kronecker_var05](/data/kronecker_var05.tsv)
+> **Визуализация графа**: <a href="/data/kronecker_var05.tsv" target="_blank">Файл данных kronecker_var05</a>
 
 **Вариант 6** 
-> **Визуализация графа**: [Файл данных kronecker_var06](/data/kronecker_var06.tsv)
+> **Визуализация графа**: <a href="/data/kronecker_var06.tsv" target="_blank">Файл данных kronecker_var06</a>
 
 **Вариант 7** 
-> **Визуализация графа**: [Файл данных kronecker_var07](/data/kronecker_var07.tsv)
+> **Визуализация графа**: <a href="/data/kronecker_var07.tsv" target="_blank">Файл данных kronecker_var07</a>
 
 **Вариант 8** 
-> **Визуализация графа**: [Файл данных kronecker_var08](/data/kronecker_var08.tsv)
+> **Визуализация графа**: <a href="/data/kronecker_var08.tsv" target="_blank">Файл данных kronecker_var08</a>
 
 **Вариант 9** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes](/data/simulated_blockmodel_graph_500_nodes.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes</a>
 
 **Вариант 10** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_1](/data/simulated_blockmodel_graph_500_nodes_snowball_1.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_1.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_1</a>
 
 **Вариант 11** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_2](/data/simulated_blockmodel_graph_500_nodes_snowball_2.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_2.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_2</a>
 
 **Вариант 12** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_3](/data/simulated_blockmodel_graph_500_nodes_snowball_3.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_3.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_3</a>
 
 **Вариант 13** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_4](/data/simulated_blockmodel_graph_500_nodes_snowball_4.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_4.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_4</a>
 
 **Вариант 14** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_5](/data/simulated_blockmodel_graph_500_nodes_snowball_5.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_5.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_5</a>
 
 **Вариант 15** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_6](/data/simulated_blockmodel_graph_500_nodes_snowball_6.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_6.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_6</a>
 
 **Вариант 16** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_7](/data/simulated_blockmodel_graph_500_nodes_snowball_7.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_7.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_7</a>
 
 **Вариант 17** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_8](/data/simulated_blockmodel_graph_500_nodes_snowball_8.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_8.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_8</a>
 
 **Вариант 18** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_9](/data/simulated_blockmodel_graph_500_nodes_snowball_9.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_9.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_9</a>
 
 **Вариант 19** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_500_nodes_snowball_10](/data/simulated_blockmodel_graph_500_nodes_snowball_10.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_500_nodes_snowball_10.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_10</a>
 
 **Вариант 20** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes](/data/simulated_blockmodel_graph_1000_nodes.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes</a>
 
 **Вариант 21** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_1](/data/simulated_blockmodel_graph_1000_nodes_snowball_1.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_1.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_1</a>
 
 **Вариант 22** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_2](/data/simulated_blockmodel_graph_1000_nodes_snowball_2.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_2.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_2</a>
 
 **Вариант 23** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_3](/data/simulated_blockmodel_graph_1000_nodes_snowball_3.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_3.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_3</a>
 
 **Вариант 24** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_4](/data/simulated_blockmodel_graph_1000_nodes_snowball_4.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_4.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_4</a>
 
 **Вариант 25** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_5](/data/simulated_blockmodel_graph_1000_nodes_snowball_5.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_5.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_5</a>
 
 **Вариант 26** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_6](/data/simulated_blockmodel_graph_1000_nodes_snowball_6.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_6.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_6</a>
 
 **Вариант 27** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_7](/data/simulated_blockmodel_graph_1000_nodes_snowball_7.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_7.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_7</a>
 
 **Вариант 28** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_8](/data/simulated_blockmodel_graph_1000_nodes_snowball_8.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_8.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_8</a>
 
 **Вариант 29** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_9](/data/simulated_blockmodel_graph_1000_nodes_snowball_9.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_9.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_9</a>
 
 **Вариант 30** 
-> **Визуализация графа**: [Файл данных simulated_blockmodel_graph_1000_nodes_snowball_10](/data/simulated_blockmodel_graph_1000_nodes_snowball_10.tsv)
+> **Визуализация графа**: <a href="/data/simulated_blockmodel_graph_1000_nodes_snowball_10.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_10</a>
 
 **Вариант 31** 
-> **Визуализация графа**: [Файл данных static_highOverlap_highBlockSizeVar_1000_nodes](/data/static_highOverlap_highBlockSizeVar_1000_nodes.tsv)
+> **Визуализация графа**: <a href="/data/static_highOverlap_highBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_highOverlap_highBlockSizeVar_1000_nodes</a>
 
 **Вариант 32** 
-> **Визуализация графа**: [Файл данных static_highOverlap_lowBlockSizeVar_1000_nodes](/data/static_highOverlap_lowBlockSizeVar_1000_nodes.tsv)
+> **Визуализация графа**: <a href="/data/static_highOverlap_lowBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_highOverlap_lowBlockSizeVar_1000_nodes</a>
 
 **Вариант 33** 
-> **Визуализация графа**: [Файл данных static_lowOverlap_highBlockSizeVar_1000_nodes](/data/static_lowOverlap_highBlockSizeVar_1000_nodes.tsv)
+> **Визуализация графа**: <a href="/data/static_lowOverlap_highBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_lowOverlap_highBlockSizeVar_1000_nodes</a>
 
 **Вариант 34** 
-> **Визуализация графа**: [Файл данных static_lowOverlap_lowBlockSizeVar_1000_nodes](/data/static_lowOverlap_lowBlockSizeVar_1000_nodes.tsv)
+> **Визуализация графа**: <a href="/data/static_lowOverlap_lowBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_lowOverlap_lowBlockSizeVar_1000_nodes</a>
 
 
 
