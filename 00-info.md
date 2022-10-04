@@ -7,10 +7,12 @@
 **Руководители практикума**
 
 
-|   <img src="assets/aleksei_popov.png" width="200"> |  <img src="assets/stanislav_ibragimov.png" width="200">  |  <img src="assets/egor_dubrovin.png" width="200">  |  <img src="assets/Li.png" width="200">  |
-|: --------------------------------------- :|: --------------------------------------- :|: --------------------------------------- :|
-|   [Алексей Попов](mailto:alexpopov@bmstu.ru), <br> *МГТУ им. Н.Э.Баумана*   |   [Станислав  Ибрагимов](mailto:ibragimov@bmstu.ru)  <br>  *МГТУ им. Н.Э.Баумана*    |   [Егор Дубровин](mailto:dubrovin.en@ya.ru)  <br>  *МГТУ им. Н.Э.Баумана*    |   [Ли Цзяцзянь](mailto:dreki.li@mail.ru)  <br>  *МГТУ им. Н.Э.Баумана*    |
+|   <img src="assets/aleksei_popov.png" width="200"> |  <img src="assets/stanislav_ibragimov.png" width="200">  |  <img src="assets/egor_dubrovin.png" width="200">  |  <img src="assets/Li.png" width="200">  |  <img src="assets/PXL_20220430_152105151.MP-modified.png" width="200">  |
+|: --------------------------------------- :|: --------------------------------------- :|: --------------------------------------- :|: --------------------------------------- :|: --------------------------------------- :|
+|   [Алексей Попов](mailto:alexpopov@bmstu.ru), <br> *МГТУ им. Н.Э.Баумана*   |   [Станислав  Ибрагимов](mailto:ibragimov@bmstu.ru)  <br>  *МГТУ им. Н.Э.Баумана*    |   [Егор Дубровин](mailto:dubrovin.en@ya.ru)  <br>  *МГТУ им. Н.Э.Баумана*    |   [Ли Цзяцзянь](mailto:dreki.li@mail.ru)  <br>  *МГТУ им. Н.Э.Баумана*    |   [Михаил Гейне](mailto: mike.geine@gmail.com)  <br>  *МГТУ им. Н.Э.Баумана*    |
  
+
+
 
 ---
 	
