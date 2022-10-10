@@ -1607,6 +1607,60 @@ _Визуализация графа_ — это графическое пред
 ```
 
 
+<!--
+```c
+ //Структуры данных
+ #define G 	        1                              //Граф
+ //Объявление индексов
+ #define ADJ_C_BITS 32                             //количество бит для хранения индекса смежной вершины графа
+ const unsigned int IDX_MAX=(1ull<<ADJ_C_BITS)-1;  //максимальная смежность
+ #define PTH_IDX  	IDX_MAX                        //номер индексной записи о вершине графа
+ 
+ ////////////////////////////////////////////////////
+ // Структура графа тип 1: (G.KEY[u,i], G.VALUE[v,w])
+ ////////////////////////////////////////////////////
+ 
+ //регистр ключа для вершины
+ 	/* Struktura 1 - G - описание графа
+ 	 * key[63..32] - номер вершины
+ 	 * key[31..0] -  индекс записи о вершине (0,1..adj_u-1)
+ 	 */
+ STRUCT(u_key){ //Data structure for graph operations
+          unsigned int                				index:32;	//Поле 1: индекс записи
+         unsigned int                				u:32; 		//Поле 0: номер вершины
+ } ;
+ 
+ //регистр значения индексной записи для вершины (с индексом PTH_IDX)
+ 	 /* key[31..0] = PTH_IDX
+ 	 *  key[63..32] = номер вершины u
+ 	 */ 
+ STRUCT(u_index){ //Data structure for graph operations
+         unsigned int                				count:32;   //Поле 1: количество записей
+         unsigned int                				any_atrs:32;//Поле 0: дополнительные атрибуты
+ } ;
+ 
+ //регистр значения для записей о смежных вершинах
+ 	/*
+ 	 * key[31..0] = 0..PTH_IDX-1
+ 	 * key[63..32] = номер вершины u
+ 	 * data[31..0] - w[u,v] вес ребра
+ 	 * atr[63..48] - номер смежной вершины v
+ 	 */
+ STRUCT(edge) { //Data structure for graph operations
+ 		unsigned int				v:32;		//Поле 1: номер смежной вершины				
+ 		unsigned int				w:32; 		//Поле 0: вес ребра (u,v)
+ } ; 
+```
+
+
+
+> Для упрощения синтаксиса описания структур и обращения к их полям мы использум шаблоны, описанные в файле <a href="https://gitlab.com/leonhard-x64-xrt-v2/libraries/sw-kernel-lib/-/blob/cpp_api/include/compose_keys.hxx" target="_blank">compose_keys.hxx</a>
+> Макрос объявления структуры выглядит следующим образом:
+> #define STRUCT(name) struct name:_base_uint64_t<name>
+> Шаблон структуры _base_uint64_t<name> позволяет описать 64 битное значение как безнаковое целое стандартного типа uint64_t и разместить его в регистрах процессора, а не в оперативной памяти. Таким образом достигается большее быстродействие.  
+-->
+
+
 
 ### 4.2.2. Представление графа *G*(*V*,*E*) списком инцидентных ребер <a name="4_2_2"></a>
 
@@ -1652,6 +1706,39 @@ _Визуализация графа_ — это графическое пред
  
 ```
 
+<!--
+```c
+ //Структуры данных
+ #define G 	        1                              //Граф
+ 
+ //////////////////////////////////////////////////
+ // Структура графа тип 2: (G.KEY[u,v], G.VALUE[w])
+ //////////////////////////////////////////////////
+ 
+ //регистр ключа для вершины
+ 	/* Struktura 1 - G - описание графа
+ 	 * key[63..32] - номер вершины u
+ 	 * key[31..0] -  номер вершины v
+ 	 */
+ STRUCT(uv_key) { //Data structure for graph operations
+         unsigned int                				v:32;	    //Поле 1: номер вершины v
+         unsigned int                				u:32; 		//Поле 0: номер вершины u
+ };
+ 
+ //регистр значения записи для ребра (u,v) 
+ 	 /* key[31..0] = дополнительные атрибуты (не использованы)
+ 	 *  key[63..32] = номер вершины u
+ 	 */ 
+ STRUCT(uv_value) { //Data structure for graph operations
+         unsigned int                				w:32;       //Поле 1: вес ребра (u,v)
+         unsigned int                				any_atrs:32;//Поле 0: дополнительные атрибуты
+ };
+ 
+```
+
+-->
+
+
 
 ### 4.2.3. Представление графа *G*(*V*,*E*) упорядоченным списком инцидентных ребер <a name="4_2_3"></a>
 
@@ -1696,6 +1783,41 @@ _Визуализация графа_ — это графическое пред
  } );
  
 ```
+
+<!--
+
+```c
+ //Структуры данных
+ #define G 	        1                              //Граф
+ 
+ ///////////////////////////////////////////////////
+ // Структура графа тип 3: (G.KEY[w,u,v], G.VALUE[])
+ ///////////////////////////////////////////////////
+ 
+ //регистр ключа для вершины
+ 	/* Struktura 1 - G - описание графа
+ 	 * key[63..48] -  вес ребра (u,v)
+ 	 * key[47..24] - номер вершины u
+ 	 * key[23..0]  - номер вершины v
+ 	 */
+ STRUCT(uv_key) { //Data structure for graph operations
+         unsigned int                				v:24;	    //Поле 2: номер вершины v
+         unsigned int                				u:24; 		//Поле 1: номер вершины u
+         unsigned int                				w:16;       //Поле 0: вес ребра (u,v)
+ };
+ 
+ //регистр значения записи для ребра (u,v) 
+ 	 /* key[63..0] = дополнительные атрибуты
+ 	 */ 
+ STRUCT(uv_value) { //Data structure for graph operations
+         unsigned int                				any_atr1:32;//Поле 1: дополнительные атрибуты
+         unsigned int                				any_atr0:32;//Поле 0: дополнительные атрибуты
+ };
+ 
+```
+
+-->
+
 В зависимости от выполняемых в алгоритме действий возможно использование как одного варианта представления, так и одновременно несколько вариантов.
 
 ## 4.3. Обработка графов с помощью набора команд дискретной математики <a name="4_3"></a>
@@ -1722,6 +1844,27 @@ _Визуализация графа_ — это графическое пред
 | *Срез структуры не ниже ключа*   | GREQ(Result, Source_A, Key)          |
 | *Двойной срез структуры*         | GRLS(Result, Source_A, Key_A, Key_B) |
 | . . .                            | . . .                                |
+
+
+После выполнения команды формируется результат в виде ключа,значения и статуса, которые доступны в коде sw_kernel в структуре lnh_core:
+
+*  lnh_core.result.key - поле ключа (64 бит);
+*  lnh_core.result.value - поле значения (64 бит);
+*  lnh_core.result.status - статус выполнения команды (64 бит).
+
+Для того, чтобы извлечь композитные поля структуры, используется приведение типа полей lnh_core к шаблону структур:
+
+-  Чтение поля из композитного ключа выполняется с помощью следующего шаблона: ```(*(ИМЯ_СТРУКТУРЫ*)&lnh_core.result.key).__struct.ИМЯ_ПОЛЯ;```. Например: ```weight = (*(uv_key*)&lnh_core.result.key).__struct.w;``` 
+
+-  Чтение поля из композитного значения выполняется аналогично с помощью следующего шаблона: ```(*(ИМЯ_СТРУКТУРЫ*)&lnh_core.result.value).__struct.ИМЯ_ПОЛЯ;```. Например: ```var = (*(u_attributes*)&lnh_core.result.value).__struct.eQ;``` 
+
+<!--
+-  Чтение поля из композитного ключа выполняется с помощью следующего шаблона: ``` get_result_key<ИМЯ_СТРУКТУРЫ>().ИМЯ_ПОЛЯ;```. Например: ```weight = get_result_key<uv_key>().w;``` 
+
+-  Чтение поля из композитного значения выполняется аналогично с помощью следующего шаблона: ``` get_result_value<ИМЯ_СТРУКТУРЫ>().ИМЯ_ПОЛЯ;```. Например: ```var = get_result_value<u_attributes>().eQ;``` 
+-->
+
+-  Запись композитных полей в сруктуру осуществляется с помощью стнадартного шаблона инициализации структуры: ``` ИМЯ_СТРУКТУРЫ{.ИМЯ_ПОЛЯ1=ЗНАЧЕНИЕ, .ИМЯ_ПОЛЯ2=ЗНАЧЕНИЕ}```, например: ``` u_key{.index=BASE_IDX, .u=u}```
 
 
 ## 4.4. Примеры реализации алгоритмов на графах <a name="4_4"></a>
@@ -1867,11 +2010,97 @@ _Визуализация графа_ — это графическое пред
 
 ```
 
+<!--
+```c
+	//Структуры для представления ключей и значений
+
+	//Структуры данных
+	#define 		G 	1 	//Граф
+	#define 		Q 	2 	//Очередь вершин
+
+	//константы алгоритма
+	#define INF 0xFFFFFFFF                           //значение бесконечности для задания неинициализированного значения пути
+	#define ADJ_C_BITS 32						     //количество бит для хранения индекса смежной вершины графа
+	const unsigned int 	IDX_MAX=(1ull<<ADJ_C_BITS)-1;//максимальная смежность
+	#define PTH_IDX  	IDX_MAX                      //номер индексной записи о вершине
+	#define BASE_IDX 	IDX_MAX-1                    //номер записи с атрибутами
+	#define VATR_IDX 	IDX_MAX-2                    //атрибуты для визуализации
+
+	///////////////////////////////////
+	// Граф 
+	///////////////////////////////////
+
+	//регистр ключа для вершины
+		/* Struktura 1 - G - описание графа
+		 * key[63..32] - номер вершины
+		 * key[31..0] -  индекс записи о вершине (0,1..adj_u)
+		 */
+	STRUCT(u_key) { //Data structure for graph operations
+	        unsigned int                				index:32;	//Поле 1: индекс
+	        unsigned int                				u:32; 		//Поле 0: номер вершины
+	};
+
+	//регистр значения индексной записи для вершины (с индексом PTH_IDX)
+		 /* key[16..0] = PTH_IDX
+		 * data[31..0] - d[u] - кратчайший путь
+		 */ 
+	STRUCT(u_index) { //Data structure for graph operations
+	        unsigned int                				du:32;    	//Поле 1: кратчайший путь
+	        unsigned int                				btwc:32;   	//Поле 0: центральность
+	};
+
+	//регистр значения атрибутов для вершины с индексом BASE_IDX
+		 /* для поля key[31..0] =  BASE_IDX
+		 * data[31..0] - p[u] - pred nomer vershini v kratchajshem puti
+		 * data[40..32] - 1 - u is in Q; 0 is not in Q
+		 * data[63..48] - |Adj[u]| - kol-vo svjazej s vershinoj u
+		 */
+	STRUCT(u_attributes) { //Data structure for graph operations
+			unsigned int					pu:32;  //Поле 3: номер предшествующей вершины в кратчайшем пути
+			bool						eQ:8;       //Поле 2: флаг присутствия вершины в очереди Q
+			bool						non:8;      //Поле 1: не используется
+			short int  					adj_c:16;   //Поле 0: количество ребер вершины
+	}; 
+
+	//регистр значения для записей о смежных вершинах
+		/*
+		 * key[INDEX] = 0..IDX_MAX-3
+		 * data[15..0] - w[u,v] вес ребра
+		 * data[47..16] - Adj[u]
+		 * atr[63..48] - virtex atributes
+		 */
+	STRUCT(edge) { //Data structure for graph operations
+			unsigned int				v:32;		//Поле 2: индекс смежной вершины				
+			short int 					w:16; 		//Поле 1: вес ребра uv
+			short int 					attr:16;	//Поле 0: атрибуты ребра
+	}; 
+
+	///////////////////////////////////
+	// Очередь для алгоритма Дейкстры
+	///////////////////////////////////
+
+
+	//регистр ключа для записей очереди
+		/*
+		 * Struktura 2 - Q - ochered'
+		 * key[31..0] - nomer vershini
+		 * key[63..32] - d[u] kratchajshij put'
+		*/
+	STRUCT(q_record) { //Data structure for queue operations
+			unsigned int					u:32;      //Поле 1: индекс вершины				
+			unsigned int					du:32;  //Поле 0: кратчайший путь				
+	}; 
+
+```
+
+-->
+
+
 Далее рассмотрим код, реализующий алгоритм Дейкстры в программном ядре CPE.
 
 ```c
  void dijkstra() {
-	//получить начальну вершину графа из MQ
+	//получить начальную вершину графа из MQ
 	uint32_t start_virtex = mq_receive(); 
 
 	//получить конечную вершину графа из MQ
@@ -1945,6 +2174,90 @@ _Визуализация графа_ — это графическое пред
  }
 ```
 
+
+<!--
+```c
+ void dijkstra() {
+	//получить начальную вершину графа из MQ
+	uint32_t start_virtex = mq_receive(); 
+
+	//получить конечную вершину графа из MQ
+	uint32_t stop_virtex = mq_receive(); 
+
+    //Очистка очереди
+    lnh_del_str_async(Q);
+
+    //добавление стартовой вершины с du=0
+    lnh_ins_async(Q,q_record{.u=start_virtex,.index=0},0);
+
+    //Получите btwc (центральность), чтобы сохранить его снова 
+    lnh_search(G,u_key{.index=PTH_IDX,.u=start_virtex});
+    btwc = get_result_value<u_index>().btwc;
+
+    // Сохраняем du для запуска virtex 
+    lnh_ins_async(G,u_key{.index=PTH_IDX,.u=start_virtex},u_index{.du=0,.btwc=btwc});
+
+    // Перебрать все вершины в очереди Qа   
+    while (lnh_get_first(Q)) {
+
+        u = get_result_key<q_record>().u;
+        du = get_result_key<q_record>().index;
+
+        //Удалит вершину из Q
+        lnh_del_async(Q,lnh_core.result.key);
+
+        //Получить значения pu, |Adj|, eQ
+        lnh_search(G,u_key{.index=BASE_IDX, .u=u});
+        pu = get_result_value<u_attributes>().pu;
+        eQ = get_result_value<u_attributes>().eQ;
+        adj_c = get_result_value<u_attributes>().adj_c; 
+
+        // Очистить флаг eQ 
+        lnh_ins_async(G,lnh_core.result.key,u_attributes{.pu=pu, .eQ=false, .non=0, .adj_c=adj_c});
+
+        //Для каждой вершины Adj
+        for (i=0;i<adj_c;i++) {
+
+            //Получить Adj[i]
+            lnh_search(G,u_key{.index=i,.u=u});
+            wu = get_result_value<edge>().w;
+            adj = get_result_value<edge>().v;
+
+            //Получить информацию о смежных вершинах
+            lnh_search(G,u_key{.index=BASE_IDX,.u=adj});
+            eQc=get_result_value<u_attributes>().eQ;
+            count=get_result_value<u_attributes>().adj_c;
+            lnh_search(G,u_key{.index=PTH_IDX,.u=adj});
+            dv=get_result_value<u_index>().du;
+            btwc=get_result_value<u_index>().btwc;
+
+            //Если изменился кратчайший путь
+            if (dv>(du+wu)) {
+                if (eQc) {
+                    //Если не петля, отправить вершину в Q
+                    if (dv!=INF) {
+                        lnh_del_async(Q,q_record{.u=adj, .index=dv});
+                    }
+                    lnh_ins_async(Q,q_record{.u=adj, .index=du+wu},0);
+                }
+
+                // Обновляем кратчайший путь
+                lnh_ins_async(G,u_key{.index=PTH_IDX,.u=adj},u_index{.du=du+wu,.btwc=btwc});
+                lnh_ins_async(G,u_key{.index=BASE_IDX,.u=adj},u_attributes{.pu=u, .eQ=eQc, .non=0, .adj_c=count});
+            }
+        }
+    }
+ 
+ 	// Сохранить кратчайший путь
+ 	lnh_search(G,INLINE(u_key,{.index=PTH_IDX, .u=stop_virtex}));
+ 	mq_send(get_result_value<u_index>().du);
+ }
+```
+
+
+-->	
+
+
 Обратите внимание, что в структуре графа G для каждой вершины выделены дополнительные индексы *PTH_IDX* и *VATR_IDX* и поле *btwc*, которые будут использованы позднее в алгоритме вычисления центральности и алгоритме визуализации. В показанном примере поле центральности копируется из ранее найденных кратчайших путей, т.е. накапливается.
 
 ```c
@@ -1952,6 +2265,17 @@ _Визуализация графа_ — это графическое пред
 	lnh_search(G,INLINE(u_key,{.index=PTH_IDX,.u=start_virtex}));
 	btwc = (*(u_index*)&lnh_core.result.value).__struct.btwc;
 ```
+
+<!--
+```c
+	//Получите btwc (центральность), чтобы сохранить его снова
+	lnh_search(G,INLINE(u_key,{.index=PTH_IDX,.u=start_virtex}));
+	btwc = get_result.value<u_index>().btwc;
+```
+
+
+-->
+
 
 ### 4.4.2. Алгоритм поиска центральности <a name="4_4_2"></a>
 
@@ -2055,6 +2379,85 @@ void btwc () {
 }
 
 ```
+
+<!--
+```c
+//-------------------------------------------------------------
+// Центральность
+//-------------------------------------------------------------
+
+void btwc () {
+
+    //Переменные
+    unsigned int u,v,pu,du,btwc;
+    short int adj_c;
+
+    //Выбераем первую вершину графа
+    lnh_get_first(G);
+    do {
+
+        //Обходим все вершины графа: u
+        u = get_result_key<u_key>().u;
+
+        //Определить кратчайшие пути от стартовой вершины u до всех вершин графа
+        dijkstra_core(u);
+        lnh_get_first(G);
+        do {
+
+            ////Обходим все смежные с u вершины графа
+            v = get_result_key<u_key>().u;
+
+            //Если ребро не замыкается на вершине (u!=v)
+            if (u!=v) { 
+				lnh_search(G,u_key{.index=PTH_IDX, .u=v});
+				du = get_result_value<u_index>().du;
+				//If there is a route to u
+				if (du!=INF) {
+					lnh_search(G,u_key{.index=BASE_IDX, .u=v});
+
+					//Получить информацию о предшествующей вершине в кратчайшем пути (pu)
+					pu = get_result_value<u_attributes>().pu;
+					while (pu!=u) {
+						//Подучить текущее значение центральности: btwc
+						lnh_search(G,u_key{.index=PTH_IDX, .u=pu});
+						btwc = get_result_value<u_index>().btwc;
+						du = get_result_value<u_index>().du;
+                        //Записать новое значение центральности btwc, и установить значение du
+						lnh_ins_async(G,u_key{.index=PTH_IDX,.u=pu},u_index{.du=du,.btwc=btwc+1});
+                        //Продолжить движение по кратчайшему пути 
+						lnh_search(G,u_key{.index=BASE_IDX, .u=pu});
+                        //Получить номер следующей вершины в кратчайшем пути pu
+						pu = get_result_value<u_attributes>().pu;
+                    }
+                }
+            }
+        } while (lnh_ngr(G,u_key{.index=IDX_MAX,.u=v})); //Read next virtex
+
+        //Подготовить граф к следующей итерации
+        lnh_get_first(G);
+        do {
+            //Получить индекс вершины графа
+            v = get_result_key<u_key>().u;
+            //Инициализировать значения для поиска кратчайшео пути
+            lnh_search(G,u_key{.index=BASE_IDX, .u=v});
+            adj_c = get_result_value<u_attributes>().adj_c; 
+            lnh_ins_async(G,u_key{.index=BASE_IDX, .u=v},u_attributes{.pu=v, .eQ=true, .non=0, .adj_c=adj_c});
+            lnh_search(G,u_key{.index=PTH_IDX,.u=v});
+            btwc = get_result_value<u_index>().btwc; //(u->v) and (v->u)
+            lnh_ins_async(G,u_key{.index=PTH_IDX, .u=v},u_index{.du=INF,.btwc=btwc});
+
+        } while (lnh_ngr(G,u_key{.index=IDX_MAX,.u=v})); //Получить индекс следующей вершины
+
+
+    } while (lnh_ngr(G,u_key{.index=IDX_MAX,.u=u})); /Получить индекс следующей вершины
+}
+
+```
+
+
+-->
+
+
 
 Пример работы алгоритма  для графа-решетки показан на следующем рисунке: 
 
