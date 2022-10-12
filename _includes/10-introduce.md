@@ -1415,78 +1415,113 @@ make clean
 
 Разработать программу для хост-подсистемы и обработчики программного ядра, выполняющие следующие действия:
 
+---
 
 **Вариант 1**
 
-> **Сетевой коммутатор на 128 портов**. Сформировать в хост-подсистеме и передать в SPE таблицу коммутации из 254 ip адресов 195.19.32.1/24 (адреса 195.19.32.1 .. 195.19.32.254). Каждому адресу поставить в соответствие один из 128 интерфесов (целые числа 0..127). Выполнить тестирование работы коммутатора, посылая из хост-подсистемы ip адреса и сравнивая полученный от GPC номер интерфейса с ожидаемым.  
+**Сетевой коммутатор на 128 портов**. Сформировать в хост-подсистеме и передать в SPE таблицу коммутации из 254 ip адресов 195.19.32.1/24 (адреса 195.19.32.1 .. 195.19.32.254). Каждому адресу поставить в соответствие один из 128 интерфесов (целые числа 0..127). Выполнить тестирование работы коммутатора, посылая из хост-подсистемы ip адреса и сравнивая полученный от GPC номер интерфейса с ожидаемым. 
+
+---
 
 **Вариант 2**
 
-> **Цифровой интерполятор**. Сформировать в хост-подсистеме и передать в SPE 256 записей key-value со значениями функции `f(x)=x^2` в диапазоне значений `x` от 0 до 1048576 (где x - ключ, f(x) - значение). Выполнить тестирование работы устройства, посылая из хост-подсистемы значение `x` и получая от sw_kernel значение `f(x)`. Если указанного значения `x` не сохранено в SPE, выполнить поиск ближайшего (меньшего или большего) значения к точке `x` и вернуть соответствующий `f(x)`. Сравнить результат с ожидаемым.  
+**Цифровой интерполятор**. Сформировать в хост-подсистеме и передать в SPE 256 записей key-value со значениями функции `f(x)=x^2` в диапазоне значений `x` от 0 до 1048576 (где x - ключ, f(x) - значение). Выполнить тестирование работы устройства, посылая из хост-подсистемы значение `x` и получая от sw_kernel значение `f(x)`. Если указанного значения `x` не сохранено в SPE, выполнить поиск ближайшего (меньшего или большего) значения к точке `x` и вернуть соответствующий `f(x)`. Сравнить результат с ожидаемым.  
+
+---
 
 **Вариант 3**
 
-> **Устройство формирования индексов SQL INTERSECT**. Сформировать в хост-подсистеме и передать в SPE 256 записей множества `A` (случайные числа в диапазое 0..1024) и 256 записей множества `B` (случайные числа в диапазоне 0..1024). Сформировать в SPE множество `C = A and B`. Выполнить тестирование работы SPE, сравнив набор ключей в множестве `C` с ожидаемым.   
+**Устройство формирования индексов SQL INTERSECT**. Сформировать в хост-подсистеме и передать в SPE 256 записей множества `A` (случайные числа в диапазое 0..1024) и 256 записей множества `B` (случайные числа в диапазоне 0..1024). Сформировать в SPE множество `C = A and B`. Выполнить тестирование работы SPE, сравнив набор ключей в множестве `C` с ожидаемым.   
+
+---
 
 **Вариант 4**
 
-> **Цифровой интерполятор ЧПЗ**. Сформировать в хост-подсистеме и передать в SPE 256 значений `x` и функции `f(x)=sin(x)`, имеющие тип double (где x - ключ, f(x) - значение). Для представления чисел double в целочисленном диапазоне использовать функции `double ull2double(uint64_t)` и `uint64_t double2ull(double)`, входящие в библиотеку sw_kernel-lib. Для случайного значения, сформированного в хост-подсистеме выполнить поиск ближайшего большего, и передать его в хост-подсистему. Выполнить тестирование работы SPE, сравнив результат с ожидаемым.  
+**Цифровой интерполятор ЧПЗ**. Сформировать в хост-подсистеме и передать в SPE 256 значений `x` и функции `f(x)=sin(x)`, имеющие тип double (где x - ключ, f(x) - значение). Для представления чисел double в целочисленном диапазоне использовать функции `double ull2double(uint64_t)` и `uint64_t double2ull(double)`, входящие в библиотеку sw_kernel-lib. Для случайного значения, сформированного в хост-подсистеме выполнить поиск ближайшего большего, и передать его в хост-подсистему. Выполнить тестирование работы SPE, сравнив результат с ожидаемым.  
+
+---
 
 **Вариант 5**
 
-> **Ассоциативная память**. Сформировать в хост-подсистеме и передать в SPE 256 случайных ключей и значений (по 64 бит). Выполнить поиск случайного значения ключа. Если результат найден, выдать его на консоль. Если результат не найден, то записать искомый ключ и случайное значение в SPE. Выполнить тестирование работы SPE, сравнив результат с ожидаемым.  
+**Ассоциативная память**. Сформировать в хост-подсистеме и передать в SPE 256 случайных ключей и значений (по 64 бит). Выполнить поиск случайного значения ключа. Если результат найден, выдать его на консоль. Если результат не найден, то записать искомый ключ и случайное значение в SPE. Выполнить тестирование работы SPE, сравнив результат с ожидаемым.  
+
+---
 
 **Вариант 6**
 
-> **Устройство интегрирования**. Сформировать в хост-подсистеме и передать в SPE 256 записей с ключами `x` и значениями `f(x)=x^2` в диапазоне значений `x` от 0 до 1048576. Передать в sw_kernel числа `x1` и `x2` (`x2>x1`). В хост-подсистему вернуть сумму значений `f(x)` на диапазоне (`x1,x2`). Сравнить результат с ожидаемым.  
+**Устройство интегрирования**. Сформировать в хост-подсистеме и передать в SPE 256 записей с ключами `x` и значениями `f(x)=x^2` в диапазоне значений `x` от 0 до 1048576. Передать в sw_kernel числа `x1` и `x2` (`x2>x1`). В хост-подсистему вернуть сумму значений `f(x)` на диапазоне (`x1,x2`). Сравнить результат с ожидаемым.  
+
+---
 
 **Вариант 7**
 
-> **Блок пакетной передачи**. Сформировать в хост-подсистеме буфер из 1048575 ключей и значений (по 64 бит). Передать буфер через глобальную память в SPE блоками по 4096 байт и выполнить вставку ключей и значений в SPE. Выполнить обход полученной структуры и результат передать в хост-подсистему блоками по 4096 байт. Сравнить результат с ожидаемым.  
+**Блок пакетной передачи**. Сформировать в хост-подсистеме буфер из 1048575 ключей и значений (по 64 бит). Передать буфер через глобальную память в SPE блоками по 4096 байт и выполнить вставку ключей и значений в SPE. Выполнить обход полученной структуры и результат передать в хост-подсистему блоками по 4096 байт. Сравнить результат с ожидаемым.  
+
+---
 
 **Вариант 8**
 
-> **Устройство вычисления обратной функции**.  Сформировать в хост-подсистеме и передать в SPE 256 записей key-value со значениями функции `f(x)=x^2` в диапазоне значений `x` от 0 до 1048576 (где f(x) - ключ, x - значение). Выполнить тестирование работы устройства, посылая из хост-подсистемы значение `f(x)` и получая от sw_kernel значение `x`. Если указанного значения `f(x)` не сохранено в SPE, выполнить поиск ближайшего (меньшего или большего) значения к `f(x)` и вернуть соответствующий `x`. Сравнить результат с ожидаемым. 
+**Устройство вычисления обратной функции**.  Сформировать в хост-подсистеме и передать в SPE 256 записей key-value со значениями функции `f(x)=x^2` в диапазоне значений `x` от 0 до 1048576 (где f(x) - ключ, x - значение). Выполнить тестирование работы устройства, посылая из хост-подсистемы значение `f(x)` и получая от sw_kernel значение `x`. Если указанного значения `f(x)` не сохранено в SPE, выполнить поиск ближайшего (меньшего или большего) значения к `f(x)` и вернуть соответствующий `x`. Сравнить результат с ожидаемым. 
+
+---
 
 **Вариант 9**
 
-> **Устройство формирования индексов SQL UNION**. Сформировать в хост-подсистеме и передать в SPE 256 записей множества `A` (случайные числа в диапазое 0..1024) и 256 записей мнжества `B` (случайные числа в диапазоне 0..1024). Сформировать в SPE множество `C = A or B`. Выполнить тестирование работы SPE, сравнив набор ключей в множестве `C` с ожидаемым.   
+**Устройство формирования индексов SQL UNION**. Сформировать в хост-подсистеме и передать в SPE 256 записей множества `A` (случайные числа в диапазое 0..1024) и 256 записей мнжества `B` (случайные числа в диапазоне 0..1024). Сформировать в SPE множество `C = A or B`. Выполнить тестирование работы SPE, сравнив набор ключей в множестве `C` с ожидаемым.   
+
+---
 
 **Вариант 10**
 
-> **Коммутатор с QoS**. Сформировать в хост-подсистеме и передать в SPE таблицу коммутации из 32 ip адресов 195.19.32.1/24 (адреса 195.19.32.1 .. 195.19.32.32), где для каждого адреса доступны 8 вариантов интерфейсов (всего 256 записей в таблице). Вариант определяется по уровню QoS, принимающему значения от 0 до 7. Выполнить тестирование работы коммутатора, посылая из хост-подсистемы уровень QoS и ip адрес, и сравнивая полученный от GPC номер интерфейса с ожидаемым.  
+**Коммутатор с QoS**. Сформировать в хост-подсистеме и передать в SPE таблицу коммутации из 32 ip адресов 195.19.32.1/24 (адреса 195.19.32.1 .. 195.19.32.32), где для каждого адреса доступны 8 вариантов интерфейсов (всего 256 записей в таблице). Вариант определяется по уровню QoS, принимающему значения от 0 до 7. Выполнить тестирование работы коммутатора, посылая из хост-подсистемы уровень QoS и ip адрес, и сравнивая полученный от GPC номер интерфейса с ожидаемым.  
+
+---
 
 **Вариант 11**
 
-> **Устройство формирования индексов SQL EXCEPT**. Сформировать в хост-подсистеме и передать в SPE 256 записей множества `A` (случайные числа в диапазое 0..1024) и 256 записей мнжества `B` (случайные числа в диапазоне 0..1024). Сформировать в SPE множество `C = A not B`. Выполнить тестирование работы SPE, сравнив набор ключей в множестве `C` с ожидаемым.   
+**Устройство формирования индексов SQL EXCEPT**. Сформировать в хост-подсистеме и передать в SPE 256 записей множества `A` (случайные числа в диапазое 0..1024) и 256 записей мнжества `B` (случайные числа в диапазоне 0..1024). Сформировать в SPE множество `C = A not B`. Выполнить тестирование работы SPE, сравнив набор ключей в множестве `C` с ожидаемым.   
+
+---
 
 **Вариант 12**
 
-> **Система сбора сетевой статистики**. Сформировать в хост-подсистеме и передать в SPE таблицу из 1024 ip адресов 195.19.32.0/22 (адреса 195.19.32.0 .. 195.19.35.255), где для каждого адреса сформированы четыре 16-ти разрядных счетчика (начальное значение - 0). Далее отправлять из хост-подсистемы номер счетчика и ip адрес. При каждом обращении увеличить соответствующий счетчик на 1. По запросу хост-подсистемы выдать состояние счетчиков для запрошенного ip адреса. 
+**Система сбора сетевой статистики**. Сформировать в хост-подсистеме и передать в SPE таблицу из 1024 ip адресов 195.19.32.0/22 (адреса 195.19.32.0 .. 195.19.35.255), где для каждого адреса сформированы четыре 16-ти разрядных счетчика (начальное значение - 0). Далее отправлять из хост-подсистемы номер счетчика и ip адрес. При каждом обращении увеличить соответствующий счетчик на 1. По запросу хост-подсистемы выдать состояние счетчиков для запрошенного ip адреса. 
+
+---
 
 **Вариант 13**
 
-> **Устройство управления памятью**. Сформировать в SPE таблицу из 1048576 записей свободных страниц (в начальный момент таблица содержит все записи) и вторую таблицу из 1048576 занятых страниц (в начальный момент таблица пуста). При поступлении от хост-подсистемы запроса на выделение страницы удалить запись с минимальным ключом из таблицы свободных страниц и добавить его в таблицу занаятых страниц. Вернуть в хост подсистему номер записанной страницы. При поступлении от хост системы запроса на освобождение страницы произвести обратное действие.
+**Устройство управления памятью**. Сформировать в SPE таблицу из 1048576 записей свободных страниц (в начальный момент таблица содержит все записи) и вторую таблицу из 1048576 занятых страниц (в начальный момент таблица пуста). При поступлении от хост-подсистемы запроса на выделение страницы удалить запись с минимальным ключом из таблицы свободных страниц и добавить его в таблицу занаятых страниц. Вернуть в хост подсистему номер записанной страницы. При поступлении от хост системы запроса на освобождение страницы произвести обратное действие.
+
+---
 
 **Вариант 13**
 
-> **Устройство хранения темпоральных данных**. Сформировать в SPE таблицу хранения темпоральных данных, для которой ключом поиска является текущее время в формате Posix time (количество секунд, прошедшее с 00:00 01.01.1970). От хост-подсистемы запрос на сохранение передается в виде текущего времени (ключ - 32 бит) и некотрого числа (значение - 64 бит). По запросу хост-подсистемы по переданной метке времени выдать число, записанное в ближайшее событии до указанного времени. 
+**Устройство хранения темпоральных данных**. Сформировать в SPE таблицу хранения темпоральных данных, для которой ключом поиска является текущее время в формате Posix time (количество секунд, прошедшее с 00:00 01.01.1970). От хост-подсистемы запрос на сохранение передается в виде текущего времени (ключ - 32 бит) и некотрого числа (значение - 64 бит). По запросу хост-подсистемы по переданной метке времени выдать число, записанное в ближайшее событии до указанного времени. 
+
+---
 
 **Вариант 14**
 
-> **Устройство проверки прав доступа**. По запросу от хост-подсистемы, содержащему 64-битный индекс и 64-битный ключ доступа необходимо выполнить поиск на наличие записи с указанным индексом в таблице прав доступа. Если такой индекс имеется, сравнить переданный ключ доступа с сохраненным, и при совпадение ответить хост системе утвердительно (значение 1). Если индекс сохранен, но ключи доступа не совпадают, ответить отрицательно (значение 0). Если индекс не найден, то создать новую запись с полученным индексом и ключом доступа.   
+**Устройство проверки прав доступа**. По запросу от хост-подсистемы, содержащему 64-битный индекс и 64-битный ключ доступа необходимо выполнить поиск на наличие записи с указанным индексом в таблице прав доступа. Если такой индекс имеется, сравнить переданный ключ доступа с сохраненным, и при совпадение ответить хост системе утвердительно (значение 1). Если индекс сохранен, но ключи доступа не совпадают, ответить отрицательно (значение 0). Если индекс не найден, то создать новую запись с полученным индексом и ключом доступа.   
+
+---
 
 **Вариант 15**
 
-> **Устройство поиска k ближайших соседей**. Сформировать в хост-подсистеме и передать в SPE 256 записей key-value со случайными значениями x и соответствующих им значениях функции `f(x)=2 * x^2 - x + 1` в диапазоне значений `x` от 0 до 1048575 (где x - ключ, f(x) - значение). По запросу хост подсистему выдать ключи `x` и значения `f(x)` 32-х ближайших в Эвклидовом пространстве точек x.
+**Устройство поиска k ближайших соседей**. Сформировать в хост-подсистеме и передать в SPE 256 записей key-value со случайными значениями x и соответствующих им значениях функции `f(x)=2 * x^2 - x + 1` в диапазоне значений `x` от 0 до 1048575 (где x - ключ, f(x) - значение). По запросу хост подсистему выдать ключи `x` и значения `f(x)` 32-х ближайших в Эвклидовом пространстве точек x.
+
+---
 
 **Вариант 16**
 
-> **Устройство управления записью в SSD накопитель**. Сформировать в SPE таблицу из 1048575 записей с номерами свободных страниц и количеством перезаписей в них (в начальный момент таблица содержит все записи, количество перезаписей равно 0) и вторую таблицу из 1048575 занятых страниц и количеством перезаписей в них (в начальный момент таблица пуста). Для таблиц старшей частью ключа является количество перезаписей, а младшей частью ключа номер страницы. При поступлении от хост-подсистемы запроса на запись удалить из таблицы свободных страниц запись с минимальным количеством перезаписей, увеличить количество перезаписей, и перенести эту информацию в таблицу занятых страниц. Вернуть в хост подсистему номер записанной страницы и ее количество перезаписей. При поступлении от хост системы запроса на освобождение страницы произвести обратное действие, количество перезаписей при этом оставить неизменным.
+**Устройство управления записью в SSD накопитель**. Сформировать в SPE таблицу из 1048575 записей с номерами свободных страниц и количеством перезаписей в них (в начальный момент таблица содержит все записи, количество перезаписей равно 0) и вторую таблицу из 1048575 занятых страниц и количеством перезаписей в них (в начальный момент таблица пуста). Для таблиц старшей частью ключа является количество перезаписей, а младшей частью ключа номер страницы. При поступлении от хост-подсистемы запроса на запись удалить из таблицы свободных страниц запись с минимальным количеством перезаписей, увеличить количество перезаписей, и перенести эту информацию в таблицу занятых страниц. Вернуть в хост подсистему номер записанной страницы и ее количество перезаписей. При поступлении от хост системы запроса на освобождение страницы произвести обратное действие, количество перезаписей при этом оставить неизменным.
+
+---
 
 **Вариант 17**
 
-> **Сетевой маршрутизатор на 128 портов**. Сформировать в хост-подсистеме и передать в SPE таблицу маршрутизации из 256 произвольно заданных непересекающихся диапазонов ip адресов 195.19.0.0/16 (адреса 195.19.0.0 .. 195.19.255.255). Каждый отрезок задается начальным адресом и маской (<</17>>..<</31>>) таким образом, что нет пересечения ip адресов (диапазоны адресов на числовой оси не пересаются). Каждому адресу поставить в соответствие один из 128 интерфесов (целые числа 0..127). При поступлении адреса от хост системы выбрать ближайший меньший (lnh_nsm) диапазон, после чего проверить соответствие ip адреса маске. Если маска соответствет существующему диапазону (адрес попадает в границы диапазона), выдать его хост-подсистеме. Если соответствующего диапазона не существует, выдать 0.  
+**Сетевой маршрутизатор на 128 портов**. Сформировать в хост-подсистеме и передать в SPE таблицу маршрутизации из 256 произвольно заданных непересекающихся диапазонов ip адресов 195.19.0.0/16 (адреса 195.19.0.0 .. 195.19.255.255). Каждый отрезок задается начальным адресом и маской (<</17>>..<</31>>) таким образом, что нет пересечения ip адресов (диапазоны адресов на числовой оси не пересаются). Каждому адресу поставить в соответствие один из 128 интерфесов (целые числа 0..127). При поступлении адреса от хост системы выбрать ближайший меньший (lnh_nsm) диапазон, после чего проверить соответствие ip адреса маске. Если маска соответствет существующему диапазону (адрес попадает в границы диапазона), выдать его хост-подсистеме. Если соответствующего диапазона не существует, выдать 0.  
 
 ---
 
@@ -2741,109 +2776,211 @@ Cannot start Bokeh server, port 33000 is already in use
 
 **Выполнить визуализацию неориентированного графа, представленного в формате tsv. Каждая строчка файла представляет собой описание ребра, сотоящее из трех чисел (Вершина,Вершина,Вес) или двух чисел (Вершина,Вершина). Во втором случае вес ребра принимается равным 1.** 
 
+---
 
 **Вариант 1** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var01.tsv" target="_blank">Файл данных kronecker_var01</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var01.tsv" target="_blank">Файл данных kronecker_var01</a>
+
+---
 
 **Вариант 2** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var02.tsv" target="_blank">Файл данных kronecker_var02</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var02.tsv" target="_blank">Файл данных kronecker_var02</a>
+
+---
 
 **Вариант 3** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var03.tsv" target="_blank">Файл данных kronecker_var03</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var03.tsv" target="_blank">Файл данных kronecker_var03</a>
+
+---
 
 **Вариант 4** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var04.tsv" target="_blank">Файл данных kronecker_var04</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var04.tsv" target="_blank">Файл данных kronecker_var04</a>
+
+---
 
 **Вариант 5** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var05.tsv" target="_blank">Файл данных kronecker_var05</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var05.tsv" target="_blank">Файл данных kronecker_var05</a>
+
+---
 
 **Вариант 6** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var06.tsv" target="_blank">Файл данных kronecker_var06</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var06.tsv" target="_blank">Файл данных kronecker_var06</a>
+
+---
 
 **Вариант 7** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var07.tsv" target="_blank">Файл данных kronecker_var07</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var07.tsv" target="_blank">Файл данных kronecker_var07</a>
+
+---
 
 **Вариант 8** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var08.tsv" target="_blank">Файл данных kronecker_var08</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/kronecker_var08.tsv" target="_blank">Файл данных kronecker_var08</a>
+
+---
 
 **Вариант 9** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes</a>
+
+---
 
 **Вариант 10** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_1.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_1</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_1.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_1</a>
+
+---
 
 **Вариант 11** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_2.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_2</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_2.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_2</a>
+
+---
 
 **Вариант 12** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_3.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_3</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_3.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_3</a>
+
+---
 
 **Вариант 13** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_4.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_4</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_4.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_4</a>
+
+---
 
 **Вариант 14** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_5.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_5</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_5.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_5</a>
+
+---
 
 **Вариант 15** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_6.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_6</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_6.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_6</a>
+
+---
 
 **Вариант 16** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_7.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_7</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_7.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_7</a>
+
+---
 
 **Вариант 17** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_8.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_8</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_8.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_8</a>
+
+---
 
 **Вариант 18** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_9.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_9</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_9.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_9</a>
+
+---
 
 **Вариант 19** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_10.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_10</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_500_nodes_snowball_10.tsv" target="_blank">Файл данных simulated_blockmodel_graph_500_nodes_snowball_10</a>
+
+---
 
 **Вариант 20** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes</a>
+
+---
 
 **Вариант 21** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_1.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_1</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_1.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_1</a>
+
+---
 
 **Вариант 22** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_2.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_2</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_2.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_2</a>
+
+---
 
 **Вариант 23** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_3.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_3</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_3.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_3</a>
+
+---
 
 **Вариант 24** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_4.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_4</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_4.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_4</a>
+
+---
 
 **Вариант 25** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_5.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_5</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_5.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_5</a>
+
+---
 
 **Вариант 26** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_6.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_6</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_6.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_6</a>
+
+---
 
 **Вариант 27** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_7.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_7</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_7.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_7</a>
+
+---
 
 **Вариант 28** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_8.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_8</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_8.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_8</a>
+
+---
 
 **Вариант 29** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_9.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_9</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_9.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_9</a>
+
+---
 
 **Вариант 30** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_10.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_10</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/simulated_blockmodel_graph_1000_nodes_snowball_10.tsv" target="_blank">Файл данных simulated_blockmodel_graph_1000_nodes_snowball_10</a>
+
+---
 
 **Вариант 31** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/static_highOverlap_highBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_highOverlap_highBlockSizeVar_1000_nodes</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/static_highOverlap_highBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_highOverlap_highBlockSizeVar_1000_nodes</a>
+
+---
 
 **Вариант 32** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/static_highOverlap_lowBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_highOverlap_lowBlockSizeVar_1000_nodes</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/static_highOverlap_lowBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_highOverlap_lowBlockSizeVar_1000_nodes</a>
+
+---
 
 **Вариант 33** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/static_lowOverlap_highBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_lowOverlap_highBlockSizeVar_1000_nodes</a>
+
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/static_lowOverlap_highBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_lowOverlap_highBlockSizeVar_1000_nodes</a>
+
+---
 
 **Вариант 34** 
-> **Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/static_lowOverlap_lowBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_lowOverlap_lowBlockSizeVar_1000_nodes</a>
 
+**Визуализация графа**: <a href="https://raw.githubusercontent.com/alexbmstu/2022/main/data/static_lowOverlap_lowBlockSizeVar_1000_nodes.tsv" target="_blank">Файл данных static_lowOverlap_lowBlockSizeVar_1000_nodes</a>
+
+---
 
 # **5. Командный практикум. Обработка и визуализация графов в вычислительном комплексе Тераграф** 
 
