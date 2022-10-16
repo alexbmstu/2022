@@ -982,7 +982,10 @@ SPE lnh64 использует беззнаковое сравнение 64 би
  //Выполнить поиск ключа, ближайшего большего ключу 0x1234
  lnh_ngr(A,INLINE(A_key,{.id=0x1234,.index=-1}));
  //Прочитать Атрибут 0 найденного значения
- atribute0 = (*(A_value*)&lnh_core.result.value).__struct.atr0;
+ atribute0 = get_result_value<A_value>().atr0;
+ atribute1 = get_result_value<A_value>().atr1;
+ //Возможно аналогичным образом прочитать ключ результата
+ index = get_result_key<A_key>().index;
  //Вставить новое значение
  lnh_ins_async(A,INLINE(A_key,{.id=atr0,.index=0}),INLINE(A_value,{.atr0=0x1234,.atr1=0,.atr2=0,.atr3=0,}));  
 ```
