@@ -1242,9 +1242,11 @@ ssh username@195.19.32.95
 
 ## 3.3. Сборка и запуск проекта 
 
-После подключения к серверу по протоколу ssh необходимо клонировать репозиторий git с кодом примера. Для этого выполните команду:
+После подключения к серверу по протоколу ssh необходимо клонировать репозиторий git с кодом примера, предварительно создав в домашнем каталоге каталог для работы с проектом. Для этого выполните команды:
 
 ```sh
+mkdir worksp
+cd worksp
 git clone --recursive https://gitlab.com/leonhard-x64-xrt-v2/disc-example.git
 ```
 
@@ -1315,7 +1317,7 @@ make clean
 ![](assets/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC_html_9110ca7511e2e853.png)  
   
 
-Запустите Vitis IDE. Создайте новое рабочее пространство (workspace). Далее выберите пункт Import Project.
+Запустите Vitis IDE. Создайте новое рабочее пространство (workspace), при этом укажите в качестве рабочего каталога каталог, созданный на шаге 3.3 (в нашем примере - это каталог `worksp`). Далее выберите пункт Import Project.
 
 
 ![](assets/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D1%83%D0%BC_html_a666017bef375619.png)  
@@ -1327,27 +1329,21 @@ make clean
 ![](assets/Screenshot1.png)
 
 
-Далее выберите пункт Clone URI
+Далее выберите пункт Existing local repository
 
-![](assets/Screenshot2.png)
+![](assets/import1.png)
 
-Далее в поле URI укажите путь к репозиторию: `https://gitlab.com/leonhard-x64-xrt-v2/disc-example`
+Далее в поле Directory укажите путь к каталогу, в который клонировался репозиторий на шаге 3.3 (в нашем примере это каталог `worksp`). Отметьте каталог `.git`, который появится в поле "Search results".
 
+![](assets/import2.png)
 
-![](assets/Screenshot3.png)
+ Далее выберите репозиторий disc-example:
 
- Далее выберите ветку main:
-
-![](assets/Screenshot4.png)
- 
-
-В следующем окне выберите пункт "Clone submodules". В пункте Directory укажите путь к созданному рабочему пространству.
-
-![](assets/Screenshot5.png)
+![](assets/import3.png)
 
 Далее выберите пункт Import existing Eclipse projects
 
-![](assets/Screenshot6.png)
+![](assets/import4.png)
 
 В следующем окне нажмите кнопку Finish. В результате будет создан корневой проект Leonhardx64_xrt_system и проект приложения Leonhardx64_xrt. 
 
@@ -1383,9 +1379,9 @@ make clean
 ![](assets/Screenshot11.png)
 
 
-Далее укажите в параметрах запуска Program Arguments путь к файлу конфигурации `leonhard_2cores_267mhz.xclbin` и программному ядру `sw_kernel_main.rawbinary`, полученный ранее в пункте <a href="#3_1_3" target="_blank">3.1.3. Сборка и запуск проекта</a>. 
+Далее укажите в параметрах запуска Program Arguments путь к файлу конфигурации `${workspace_loc}/disc-example/leonhard_2cores_267mhz.xclbin` и программному ядру `${workspace_loc}/disc-example/sw_kernel_main.rawbinary`, полученный ранее в пункте <a href="#3_1_3" target="_blank">3.1.3. Сборка и запуск проекта</a>. 
 
-![](assets/Screenshot12.png)
+![](assets/debug_configuration.png)
 
 
 В итоге будет запущена отладка проекта хост-подсистемы. 
