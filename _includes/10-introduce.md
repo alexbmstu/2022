@@ -2515,12 +2515,6 @@ struct Graph {
         };
 
         //регистр значения для записей о смежных вершинах:
-        /*
-         * key[INDEX] = 0..IDX_MAX-3
-         * data[15..0] - w[u,v] вес ребра
-         * data[47..16] - Adj[u]
-         * atr[63..48] - virtex atributes
-         */
         STRUCT(Edge) {
                 virtex_t     v: 32;
                 short int    w: 16;
@@ -2528,20 +2522,12 @@ struct Graph {
         };
 
         //регистр значения индексной записи для вершины (с индексом PTH_IDX):
-        /* key[16..0] = PTH_IDX
-        * data[31..0] - d[u] - кратчайший путь
-        */
         STRUCT(Shortest_path) {
                 virtex_t     du: 32;
                 unsigned int btwc: 32;
         };
 
         //регистр значения атрибутов для вершины с индексом BASE_IDX: STRUCT(u_attributes)
-        /* для поля key[31..0] =  BASE_IDX
-        * data[31..0] - p[u] - pred nomer vershini v kratchajshem puti
-        * data[40..32] - 1 - u is in Q; 0 is not in Q
-        * data[63..48] - |Adj[u]| - kol-vo svjazej s vershinoj u
-        */
         STRUCT(Attributes) {
                 unsigned int pu: 32;
                 bool         eQ: 8;
@@ -2550,18 +2536,11 @@ struct Graph {
         };
 
         //регистр значения для записи атрибутов визуализации вершинах
-        /*
-         * key[INDEX] = IDX_MAX-2
-         * data[15..0]  - координата x визуализации вершины
-         * data[31..16] - координата y визуализации вершины
-         * data[23..24] - Adj[u]
-         * atr[63..48] - virtex atributes
-         */
         STRUCT(vAttributes) { //Data structure for graph operations
                 unsigned short int                              x: 16;          //Поле 1: координата x [0..64K]
                 unsigned short int                              y: 16;          //Поле 2: координата y [0..64K]
                 unsigned short int                              size: 8;        //Поле 3: размер [0..255]
-                unsigned int                                    color: 24;      //Поле 4: цвет [0x00000000..0xFFFFFFFF]
+                unsigned int                                    color: 24;      //Поле 4: цвет [0x000000..0xFFFFFF]
         };
 
         //Обязательная типизация
