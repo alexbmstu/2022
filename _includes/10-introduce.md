@@ -2028,7 +2028,7 @@ for (auto [adj, wu, attr] : edge_range(G1, v)) {
 
 Например, можно использовать следующий пример для определения количества ребер графа и вычисления средего веса ребра:
 
-```с
+```c
 uint32_t weight_sum=0; //сумма весов ребер
 uint32_t edge_count=0; //количество ребер
 //Обход всех вершин графа и вычисление среднего веса ребра
@@ -2079,12 +2079,21 @@ for (auto [u, du] : queue_range_ascending{Q1}) {
 Пример использования итератора обхода очереди в обратном порядке: 
 
 ```c
-//обход всех вершины графа
-for (auto [u, du] : queue_range_descending{Q1}) {
-  	...
+//Обход всех записей очереди без изменения содержимого
+for(auto [id, du]:reverse{Q}) {
+			//Получение центральности
+			btwc_sum += du;
 }
 ```
 
+В некоторых случаях требуется модифицировать очередь и выбирать записи из хвоста или головы очереди. Для этого можно использовать методы структуры очереди `rbegin` (головная, первая запись очереди), `rend` (хвост, последняя вершина очереди), а также функцию удаления элемента из очереди `erase`:
+
+```c
+//обход всех вершины графа
+    while(auto q_it = Q.rbegin()) {
+        Q.erase(q_it);
+	auto [u, du] = *q_it;
+```
 
 Для визуализации графов часто требуется объединить вершины в сообщества по свойству модулярности (смотри алгоритм в разделе "4.4.3.1. Выделение сообществ на основе алгоритма MultiLevel").
 Следующие структуры используются для построения сообществ. а также для размещения сообществ вершин в прямоугольных областях экрана.
@@ -2722,38 +2731,40 @@ struct Graph {
 ```c
 void dijkstra_core(unsigned int start_virtex) {
     //Очистка очереди
-    Q1.del_str_async();
+    Q.del_str_async();
     //добавление стартовой вершины с du=0
-    Q1.ins_async(Queue::Record{.id = start_virtex, .du = 0}, Queue::Attributes{});
+    Q.ins_async(Queue::Record{.id = start_virtex, .du = 0}, Queue::Attributes{});
     //Get btwc to store it again
-    auto [du, btwc] = G1.search(Graph::Path_key{.u = start_virtex}).value();
+    auto [du, btwc] = G.search(Graph::Path_key{.u = start_virtex}).value();
     //Save du for start virtex
-    G1.ins_async(Graph::Path_key{.u = start_virtex}, Graph::Shortest_path{.du = 0, .btwc = btwc});
+    G.ins_async(Graph::Path_key{.u = start_virtex}, Graph::Shortest_path{.du = 0, .btwc = btwc});
     //обход всех вершины графа
-    for (auto [u, du] : queue_range_descending{Q1}) {
+    while(auto q_it = Q.rbegin()) {
+        Q.erase(q_it);
+	auto [u, du] = *q_it;
         //Get pu, |Adj|, eQ
-        auto result = G1.search(Graph::Base_key{.u = u});
+        auto result = G.search(Graph::Base_key{.u = u});
         auto [pu, eQ, non, adj_c] = result.value();
         // Clear eQ
-        G1.ins_async(result.key(), Graph::Attributes{.pu = pu, .eQ = false, .non = 0, .adj_c = adj_c});
+        G.ins_async(result.key(), Graph::Attributes{.pu = pu, .eQ = false, .non = 0, .adj_c = adj_c});
         //For each Adj
-        for (auto [adj, wu, attr] : edge_range(G1, u)) {
+        for (auto [adj, wu, attr] : edge_range(G, u)) {
             //Get information about Adj[i]
-            auto [adj_pu, eQc, non, count] = G1.search(Graph::Base_key{.u = adj}).value();
-            auto [dv, btwc] = G1.search(Graph::Path_key{.u = adj}).value();
+            auto [adj_pu, eQc, non, count] = G.search(Graph::Base_key{.u = adj}).value();
+            auto [dv, btwc] = G.search(Graph::Path_key{.u = adj}).value();
             //Change distance
             if (dv > (du + wu)) {
                 if (eQc) {
                     //if not loopback, push to Q
-                    if (dv != INF) {
-                        Q1.del_async(Queue::Record{.id = adj, .du = dv});
+                    if (dv != Graph::inf) {
+                        Q.del_async(Queue::Record{.id = adj, .du = dv});
                     }
-                    Q1.ins_async(Queue::Record{.id = adj, .du = du + wu}, Queue::Attributes{});
+                    Q.ins_async(Queue::Record{.id = adj, .du = du + wu}, Queue::Attributes{});
                 }
                 //change du
-                G1.ins_async(Graph::Path_key{.u = adj}, Graph::Shortest_path{.du = du + wu, .btwc = btwc});
+                G.ins_async(Graph::Path_key{.u = adj}, Graph::Shortest_path{.du = du + wu, .btwc = btwc});
                 //change pu
-                G1.ins_async(Graph::Base_key{.u = adj}, Graph::Attributes{.pu = u, .eQ = eQc, .non = 0, .adj_c = count});
+                G.ins_async(Graph::Base_key{.u = adj}, Graph::Attributes{.pu = u, .eQ = eQc, .non = 0, .adj_c = count});
             }
         }
     }
