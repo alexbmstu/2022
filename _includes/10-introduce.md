@@ -2877,7 +2877,7 @@ void dijkstra_core(unsigned int start_virtex) {
     //обход всех вершины графа
     while(auto q_it = Q.rbegin()) {
         Q.erase(q_it);
-	auto [u, du] = *q_it;
+	    auto [u, du] = *q_it;
         //Get pu, |Adj|, eQ
         auto result = G.search(Graph::Base_key{.u = u});
         auto [pu, eQ, non, adj_c] = result.value();
