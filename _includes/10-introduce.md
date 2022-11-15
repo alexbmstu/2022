@@ -2683,12 +2683,12 @@ cd btwc-dijkstra-xrt
 make
 ```
 
-Результатом выполнения команды станет файлы host_main, sw_kernel_main.rawbinary и leonhard_2cores_267mhz.xclbin в директории проекта верхнего уровня.
+Результатом выполнения команды станет файлы host/host_main, sw-kernel/sw_kernel.rawbinary и leonhard_2cores_267mhz.xclbin в директории проекта верхнего уровня.
 
 Для запуска проекта выполните команду
 
 ```sh
-screen ./host/host_main leonhard_2cores_267mhz.xclbin ./sw_kernel/sw_kernel_main.rawbinary
+screen ./host/host_main leonhard_2cores_267mhz.xclbin ./sw-kernel/sw_kernel.rawbinary
 ```
 
 
