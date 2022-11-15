@@ -3250,6 +3250,31 @@ make
 ```sh
 screen ./host/host_main leonhard_2cores_267mhz.xclbin ./sw_kernel/sw_kernel_main.rawbinary
 ```
+Результатом выполнения команды станет файлы host_main, sw_kernel_main.rawbinary и leonhard_2cores_267mhz.xclbin в директории проекта верхнего уровня.
+
+Для запуска проекта выполните команду
+
+```sh
+screen ./host/host_main leonhard_2cores_267mhz.xclbin ./sw_kernel/sw_kernel_main.rawbinary
+```
+
+Для выбора варианта раскладки графа необходимо указать в файле ./host/src/host_main.cpp один из вариантов:
+
+- Разсладка сообществ с помощью иерархического объединения и укладки в боксы:
+```
+#define BOX_LAYOUT
+//#define FORCED_LAYOUT
+```
+
+или
+
+- Раскладка сообществ с помощью силового алгоритма Фрухтермана-Рейнгольда:
+
+```
+//#define BOX_LAYOUT
+#define FORCED_LAYOUT
+```
+
 
 
 > Если устройство занято другим проектом, вы можете сбросить его командой ```xbutil reset```!
