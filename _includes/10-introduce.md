@@ -3248,14 +3248,14 @@ make
 Для запуска проекта выполните команду
 
 ```sh
-screen ./host/host_main leonhard_2cores_267mhz.xclbin ./sw_kernel/sw_kernel_main.rawbinary
+./host/host_main leonhard_2cores_267mhz.xclbin ./sw_kernel/sw_kernel_main.rawbinary
 ```
 Результатом выполнения команды станет файлы host_main, sw_kernel_main.rawbinary и leonhard_2cores_267mhz.xclbin в директории проекта верхнего уровня.
 
 Для запуска проекта выполните команду
 
 ```sh
-screen ./host/host_main leonhard_2cores_267mhz.xclbin ./sw_kernel/sw_kernel_main.rawbinary
+./host/host_main leonhard_2cores_267mhz.xclbin ./sw_kernel/sw_kernel_main.rawbinary
 ```
 
 Для выбора варианта раскладки графа необходимо указать в файле ./host/src/host_main.cpp один из вариантов:
