@@ -3248,13 +3248,6 @@ make
 Для запуска проекта выполните команду
 
 ```sh
-./host/host_main leonhard_2cores_267mhz.xclbin ./sw_kernel/sw_kernel_main.rawbinary
-```
-Результатом выполнения команды станет файлы host_main, sw_kernel_main.rawbinary и leonhard_2cores_267mhz.xclbin в директории проекта верхнего уровня.
-
-Для запуска проекта выполните команду
-
-```sh
 ./host/host_main leonhard_2cores_267mhz.xclbin ./sw-kernel/sw_kernel.rawbinary
 ```
 
