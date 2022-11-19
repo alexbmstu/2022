@@ -3255,7 +3255,7 @@ make
 Для запуска проекта выполните команду
 
 ```sh
-./host/host_main leonhard_2cores_267mhz.xclbin ./sw_kernel/sw_kernel_main.rawbinary
+./host/host_main leonhard_2cores_267mhz.xclbin ./sw-kernel/sw_kernel.rawbinary
 ```
 
 Для выбора варианта раскладки графа необходимо указать в файле ./host/src/host_main.cpp один из вариантов:
