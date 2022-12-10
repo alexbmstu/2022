@@ -2875,7 +2875,7 @@ void dijkstra_core(unsigned int start_virtex) {
     //Save du for start virtex
     G.ins_async(Graph::Path_key{.u = start_virtex}, Graph::Shortest_path{.du = 0, .btwc = btwc});
     //обход всех вершины графа
-    while(auto q_it = Q.rbegin()) {
+    while(auto q_it = Q.begin()) {
         Q.erase(q_it);
 	    auto [u, du] = *q_it;
         //Get pu, |Adj|, eQ
